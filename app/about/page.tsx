@@ -26,7 +26,7 @@ export default function AboutPage() {
               Our Mission
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-              We're dedicated to helping developers, entrepreneurs, and AI enthusiasts stay ahead 
+              We&apos;re dedicated to helping developers, entrepreneurs, and AI enthusiasts stay ahead 
               in the fast-paced world of artificial intelligence. Through in-depth tutorials, 
               honest tool reviews, and practical guides, we make AI development accessible to everyone.
             </p>
@@ -68,7 +68,7 @@ export default function AboutPage() {
                 Community First
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                We're building a community of AI developers who learn from and support 
+                We&apos;re building a community of AI developers who learn from and support 
                 each other on their journey.
               </p>
             </div>
