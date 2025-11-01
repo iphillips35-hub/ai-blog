@@ -14,7 +14,7 @@ export default function BannerAd({ position = "top" }: BannerAdProps) {
       </div>
       <div className="container mx-auto px-4">
         <AdUnit 
-          slot="1122334455" // Replace with your ad slot ID
+          slot="5696674685" // Replace with your ad slot ID
           format="horizontal"
           responsive={true}
           className="min-h-[90px] md:min-h-[250px] flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg"

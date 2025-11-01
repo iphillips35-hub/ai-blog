@@ -9,7 +9,7 @@ export default function SidebarAd() {
         Advertisement
       </div>
       <AdUnit 
-        slot="0987654321" // Replace with your ad slot ID
+        slot="1757429676" // Replace with your ad slot ID
         format="vertical"
         responsive={true}
         className="min-h-[600px] flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg"

@@ -9,7 +9,7 @@ export default function InArticleAd() {
         Advertisement
       </div>
       <AdUnit 
-        slot="1234567890" // Replace with your ad slot ID
+        slot="9795701798" // Replace with your ad slot ID
         format="auto"
         responsive={true}
         className="min-h-[250px] flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg"
