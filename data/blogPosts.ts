@@ -15,72 +15,47 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "getting-started-with-langchain",
-    title: "Getting Started with LangChain: Building Your First AI Application",
-    excerpt: "Learn how to build powerful AI applications using LangChain, the framework that's revolutionizing how developers work with large language models.",
+    slug: "building-agentic-ai-apps-2026",
+    title: "Building Agentic AI Apps in 2026: From Chatbots to Reliable Workflows",
+    excerpt: "Move beyond simple chat interfaces with practical patterns for tool use, planning, memory, approvals, and monitoring in agentic AI applications.",
     content: `
-# Getting Started with LangChain
+# Building Agentic AI Apps in 2026
 
-LangChain is a powerful framework for developing applications powered by language models. In this comprehensive guide, we'll walk through building your first AI application.
+AI products are moving from single-turn chatbots toward agentic workflows that can research, plan, call tools, update records, and ask for approval when confidence is low. The best systems do not simply let a model act freely; they combine model reasoning with product constraints, typed tools, observability, and human oversight.
 
-## What is LangChain?
+## What Makes an App Agentic?
 
-LangChain is a framework designed to simplify the creation of applications using large language models (LLMs). It provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.
+An agentic app can break a goal into steps, choose from available tools, inspect the result, and continue until it reaches a useful outcome. That might mean drafting a sales follow-up from CRM context, triaging support tickets, generating a pull request, or reconciling invoice data.
 
-## Key Features
+## Core Architecture
 
-- **Modular Components**: Build complex applications from simple, reusable components
-- **Chain Management**: Easily create sequences of calls to LLMs and other tools
-- **Memory Systems**: Maintain context across multiple interactions
-- **Agent Framework**: Build autonomous agents that can use tools and make decisions
+Most reliable agentic systems include:
 
-## Building Your First Application
+- **A clear task boundary** so the model knows what it can and cannot do
+- **Typed tools** with strict inputs, outputs, and permission levels
+- **Short-term context** for the current task and long-term memory for durable facts
+- **Evaluation hooks** that measure success, cost, latency, and failure modes
+- **Human approval gates** for expensive, destructive, or sensitive actions
 
-Let's create a simple question-answering application:
+## Designing Safer Tool Use
 
-\`\`\`python
-from langchain.llms import OpenAI
-from langchain.chains import LLMChain
-from langchain.prompts import PromptTemplate
+Treat every tool call like a production API integration. Validate inputs before execution, return structured errors, and avoid giving the model broad access to internal systems. For high-risk actions, generate a proposed action first and require a user confirmation before anything changes.
 
-# Initialize the LLM
-llm = OpenAI(temperature=0.7)
+## Planning Without Overengineering
 
-# Create a prompt template
-template = "Answer the following question: {question}"
-prompt = PromptTemplate(template=template, input_variables=["question"])
+Not every task needs a long plan. Use lightweight planning when a task has multiple dependencies, uncertain data, or external side effects. For simpler requests, a direct answer or single tool call is faster and more reliable.
 
-# Create a chain
-chain = LLMChain(llm=llm, prompt=prompt)
+## Monitoring Agents in Production
 
-# Run the chain
-response = chain.run("What is artificial intelligence?")
-print(response)
-\`\`\`
-
-## Advanced Patterns
-
-Once you've mastered the basics, you can explore:
-
-- **Document Loading**: Process and query large documents
-- **Vector Stores**: Implement semantic search capabilities
-- **Agents**: Create autonomous AI assistants
-- **Custom Chains**: Build specialized workflows for your use case
-
-## Best Practices
-
-1. **Start Simple**: Begin with basic chains before moving to complex agents
-2. **Test Thoroughly**: LLM outputs can be unpredictable, so test extensively
-3. **Monitor Costs**: Keep track of API usage to manage expenses
-4. **Handle Errors**: Implement robust error handling for production applications
+Log each step of the run, including model inputs, selected tools, tool outputs, cost, latency, and final status. This makes it possible to debug bad outcomes, improve prompts, and identify tools that need better schemas or clearer error messages.
 
 ## Conclusion
 
-LangChain opens up endless possibilities for AI application development. Start experimenting today and see what you can build!
+The most useful agentic products in 2026 are not magic black boxes. They are carefully scoped workflows where AI handles ambiguity while software engineering provides structure, safety, and repeatability.
     `,
-    date: "2025-09-25",
+    date: "2026-06-04",
     readTime: "8 min read",
-    category: "Tutorial",
+    category: "Agents",
     featured: true,
     author: {
       name: "Alex Johnson",
@@ -88,71 +63,46 @@ LangChain opens up endless possibilities for AI application development. Start e
     }
   },
   {
-    slug: "top-10-ai-tools-2025",
-    title: "Top 10 AI Tools Every Developer Should Know in 2025",
-    excerpt: "Discover the most powerful AI tools that are transforming how developers build applications, from code assistants to image generators.",
+    slug: "rag-evaluation-best-practices",
+    title: "RAG Evaluation Best Practices: How to Measure Retrieval Quality",
+    excerpt: "Learn how to evaluate retrieval-augmented generation systems with test sets, relevance metrics, answer groundedness, and regression checks.",
     content: `
-# Top 10 AI Tools Every Developer Should Know in 2025
+# RAG Evaluation Best Practices
 
-The AI landscape is evolving rapidly. Here are the essential tools that every developer should have in their toolkit.
+Retrieval-augmented generation is now a default pattern for enterprise AI apps, but many teams still judge quality by reading a few sample answers. That is not enough for production. A reliable RAG system needs repeatable evaluation across retrieval, generation, and user experience.
 
-## 1. GitHub Copilot
+## Start With Real Questions
 
-Your AI pair programmer that suggests code and entire functions in real-time. It's like having an expert developer looking over your shoulder.
+Build an evaluation set from support tickets, search logs, sales calls, product documentation, and internal knowledge base queries. Synthetic questions can help fill gaps, but real user language reveals messy phrasing, missing context, and ambiguous intent.
 
-**Key Features:**
-- Context-aware code suggestions
-- Multi-language support
-- IDE integration
+## Measure Retrieval Separately
 
-## 2. GPT-4
+Before judging the final answer, check whether the retriever found the right evidence. Track:
 
-OpenAI's most advanced language model offers unprecedented capabilities for natural language understanding and generation.
+- **Recall**: did the system retrieve the documents needed to answer?
+- **Precision**: were the retrieved chunks actually relevant?
+- **Rank quality**: did the best evidence appear near the top?
+- **Coverage**: are important topics underrepresented in the index?
 
-**Use Cases:**
-- Chatbots and virtual assistants
-- Content generation
-- Code explanation and documentation
+## Evaluate Grounded Answers
 
-## 3. Midjourney
+A good RAG answer should be useful and grounded in the supplied context. Score whether the response answers the question, cites the correct source, avoids unsupported claims, and admits when the knowledge base does not contain enough information.
 
-Create stunning visual content with simple text prompts. Perfect for designers, marketers, and content creators.
+## Tune Chunking and Metadata
 
-## 4. Stable Diffusion
+Chunk size, overlap, document structure, and metadata filters can matter more than the embedding model. Preserve headings, product names, dates, permissions, and source URLs so retrieved context is easier for the model to use.
 
-Open-source alternative to Midjourney, offering more control and customization options.
+## Add Regression Tests
 
-## 5. Claude
-
-Anthropic's AI assistant focused on being helpful, harmless, and honest. Great for complex reasoning tasks.
-
-## 6. Hugging Face Transformers
-
-Access thousands of pre-trained models for various AI tasks, from text classification to image generation.
-
-## 7. LangChain
-
-Framework for building applications with LLMs, making it easier to create complex AI workflows.
-
-## 8. Pinecone
-
-Vector database optimized for AI applications, perfect for semantic search and recommendation systems.
-
-## 9. Replicate
-
-Run and deploy machine learning models in the cloud without managing infrastructure.
-
-## 10. Weights & Biases
-
-Track experiments, visualize results, and collaborate on ML projects with your team.
+Every update to prompts, indexes, embeddings, or rerankers can change behaviour. Keep a small high-value regression suite that runs in CI so quality does not drift after seemingly harmless changes.
 
 ## Conclusion
 
-These tools are just the beginning. The AI ecosystem is growing rapidly, and staying updated is crucial for modern developers.
+RAG quality improves fastest when teams measure each stage independently. Retrieval, reranking, prompting, and answer generation all need their own feedback loops.
     `,
-    date: "2025-09-22",
-    readTime: "10 min read",
-    category: "Tools",
+    date: "2026-06-02",
+    readTime: "9 min read",
+    category: "RAG",
     featured: true,
     author: {
       name: "Sarah Chen",
@@ -160,135 +110,46 @@ These tools are just the beginning. The AI ecosystem is growing rapidly, and sta
     }
   },
   {
-    slug: "building-chatbot-with-openai",
-    title: "Building a Production-Ready Chatbot with OpenAI API",
-    excerpt: "A step-by-step guide to creating a robust, scalable chatbot using the OpenAI API, complete with best practices and deployment strategies.",
+    slug: "multimodal-ai-product-design",
+    title: "Multimodal AI Product Design: Practical UX Patterns for Text, Image, Audio, and Video",
+    excerpt: "Design better AI features by combining text, screenshots, voice notes, documents, and video clips without overwhelming users.",
     content: `
-# Building a Production-Ready Chatbot with OpenAI API
+# Multimodal AI Product Design
 
-Creating a chatbot is easy. Building one that's production-ready is a different challenge. Let's explore how to do it right.
+Multimodal models make it possible to reason across text, images, audio, documents, and video. The product challenge is deciding when those capabilities make the experience simpler rather than more complicated.
 
-## Architecture Overview
+## Start With User Intent
 
-A production chatbot needs:
-- Robust error handling
-- Rate limiting
-- Conversation memory
-- User authentication
-- Analytics and monitoring
+Do not add every input type just because the model supports it. Ask what the user is trying to accomplish. A screenshot may be better than a written bug report, a voice note may be faster than a form, and a document upload may be safer than copying sensitive text into a chat box.
 
-## Setting Up the Foundation
+## Useful Multimodal Patterns
 
-\`\`\`typescript
-import OpenAI from 'openai';
+Strong use cases include:
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+- **Screenshot debugging** for UI issues, error messages, and layout problems
+- **Document understanding** for invoices, contracts, reports, and policies
+- **Voice-to-workflow** for field teams, clinicians, and mobile-first users
+- **Video summarisation** for meetings, training material, and customer research
 
-async function chat(message: string, conversationHistory: any[]) {
-  try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: [
-        { role: "system", content: "You are a helpful assistant." },
-        ...conversationHistory,
-        { role: "user", content: message }
-      ],
-      temperature: 0.7,
-      max_tokens: 500,
-    });
-    
-    return response.choices[0].message.content;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-}
-\`\`\`
+## Make Inputs Inspectable
 
-## Implementing Conversation Memory
+Users need to know what the model saw. Show uploaded files, extracted text, detected entities, timestamps, and image regions where appropriate. This builds trust and makes corrections easier.
 
-Store conversation history to maintain context:
+## Handle Uncertainty Clearly
 
-\`\`\`typescript
-class ConversationManager {
-  private conversations = new Map();
-  
-  addMessage(userId: string, role: string, content: string) {
-    if (!this.conversations.has(userId)) {
-      this.conversations.set(userId, []);
-    }
-    
-    const history = this.conversations.get(userId);
-    history.push({ role, content });
-    
-    // Keep only last 10 messages to manage token usage
-    if (history.length > 10) {
-      history.shift();
-    }
-  }
-  
-  getHistory(userId: string) {
-    return this.conversations.get(userId) || [];
-  }
-}
-\`\`\`
+Multimodal systems can misread small text, low-quality audio, or visually ambiguous content. Provide confidence cues, ask clarifying questions, and make it easy for users to edit extracted information before it is used downstream.
 
-## Rate Limiting
+## Accessibility Matters
 
-Protect your API budget with rate limiting:
-
-\`\`\`typescript
-import rateLimit from 'express-rate-limit';
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message: 'Too many requests, please try again later.'
-});
-
-app.use('/api/chat', limiter);
-\`\`\`
-
-## Error Handling
-
-Implement comprehensive error handling:
-
-\`\`\`typescript
-async function safeChat(message: string, userId: string) {
-  try {
-    const history = conversationManager.getHistory(userId);
-    const response = await chat(message, history);
-    
-    conversationManager.addMessage(userId, 'user', message);
-    conversationManager.addMessage(userId, 'assistant', response);
-    
-    return { success: true, response };
-  } catch (error) {
-    if (error.status === 429) {
-      return { success: false, error: 'Rate limit exceeded' };
-    }
-    return { success: false, error: 'An error occurred' };
-  }
-}
-\`\`\`
-
-## Deployment Considerations
-
-- Use environment variables for API keys
-- Implement logging and monitoring
-- Set up alerts for errors and high usage
-- Consider using a queue for handling requests
-- Implement graceful degradation
+Multimodal AI should improve accessibility, not reduce it. Support captions, transcripts, keyboard navigation, alt text, and readable summaries. Always provide a text fallback for important interactions.
 
 ## Conclusion
 
-Building a production-ready chatbot requires attention to detail, but the result is a robust application that can scale with your users.
+The best multimodal products use the right input at the right moment. They reduce friction, preserve user control, and make model interpretation visible.
     `,
-    date: "2025-09-20",
-    readTime: "12 min read",
-    category: "Tutorial",
+    date: "2026-05-29",
+    readTime: "7 min read",
+    category: "UX",
     featured: true,
     author: {
       name: "Michael Torres",
@@ -296,133 +157,41 @@ Building a production-ready chatbot requires attention to detail, but the result
     }
   },
   {
-    slug: "ai-ethics-considerations",
-    title: "AI Ethics: What Every Developer Needs to Consider",
-    excerpt: "Explore the ethical implications of AI development and learn how to build responsible AI applications that benefit society.",
+    slug: "local-llms-for-developers",
+    title: "Local LLMs for Developers: When to Run Models on Your Own Hardware",
+    excerpt: "Explore when local models make sense for privacy, latency, cost control, offline workflows, and prototyping.",
     content: `
-# AI Ethics: What Every Developer Needs to Consider
+# Local LLMs for Developers
 
-As AI becomes more powerful, ethical considerations become increasingly important. Here's what you need to know.
+Local language models have become practical for more developer workflows. They are not always a replacement for frontier hosted models, but they are increasingly useful for private data, offline tools, repeatable tests, and cost-sensitive automation.
 
-## Key Ethical Principles
+## When Local Models Shine
 
-### 1. Fairness and Bias
+Local models are a strong fit when you need:
 
-AI systems can perpetuate or amplify existing biases. Always:
-- Test with diverse datasets
-- Monitor for discriminatory outcomes
-- Implement bias detection and mitigation strategies
+- **Privacy** for code, documents, or customer data that should not leave the machine
+- **Low latency** for small tasks that run repeatedly
+- **Offline support** for field work or restricted environments
+- **Predictable costs** for high-volume internal workflows
+- **Experimentation** without sending every prompt to a hosted API
 
-### 2. Transparency
+## Trade-Offs to Consider
 
-Users should understand when they're interacting with AI:
-- Clearly label AI-generated content
-- Explain how decisions are made
-- Provide opt-out options when possible
+Hosted frontier models may still outperform local models on complex reasoning, long-context synthesis, and specialised multimodal tasks. Local models also require hardware planning, model management, quantisation choices, and operational updates.
 
-### 3. Privacy
+## Good Developer Use Cases
 
-Protect user data:
-- Minimize data collection
-- Implement strong security measures
-- Be transparent about data usage
+Practical local workflows include code explanation, commit message drafting, log summarisation, test data generation, documentation cleanup, and first-pass classification. For high-stakes answers, combine local inference with review or escalation to a stronger hosted model.
 
-### 4. Accountability
+## Hybrid Architectures
 
-Take responsibility for your AI systems:
-- Implement monitoring and logging
-- Have processes for addressing issues
-- Be prepared to explain decisions
-
-## Practical Guidelines
-
-1. **Conduct Impact Assessments**: Before deploying AI, assess potential negative impacts
-2. **Diverse Teams**: Include diverse perspectives in development
-3. **Regular Audits**: Continuously monitor for bias and errors
-4. **User Control**: Give users control over AI interactions
-5. **Clear Documentation**: Document limitations and potential issues
-
-## Case Studies
-
-Learn from others' mistakes and successes in AI ethics.
+Many teams use a hybrid approach: local models for quick private tasks, hosted models for complex reasoning, and routing rules based on risk, sensitivity, and cost. This gives teams flexibility without forcing every use case into one model.
 
 ## Conclusion
 
-Ethical AI development isn't just good practice—it's essential for building trust and creating sustainable AI applications.
+Local LLMs are most valuable when they are matched to the right workload. Use them where privacy, speed, and control matter, and route harder tasks to stronger models when needed.
     `,
-    date: "2025-09-18",
-    readTime: "7 min read",
-    category: "Ethics",
-    featured: false,
-    author: {
-      name: "Dr. Emily Watson",
-      avatar: "EW"
-    }
-  },
-  {
-    slug: "vector-databases-explained",
-    title: "Vector Databases Explained: The Backbone of Modern AI Apps",
-    excerpt: "Understanding vector databases and why they're essential for building AI applications with semantic search and recommendations.",
-    content: `
-# Vector Databases Explained
-
-Vector databases are revolutionizing how we build AI applications. Let's explore what they are and why they matter.
-
-## What Are Vector Databases?
-
-Vector databases store and query high-dimensional vectors, enabling:
-- Semantic search
-- Recommendation systems
-- Similarity matching
-- RAG (Retrieval Augmented Generation)
-
-## Popular Vector Databases
-
-### Pinecone
-- Fully managed
-- Easy to use
-- Excellent performance
-
-### Weaviate
-- Open source
-- GraphQL API
-- Hybrid search capabilities
-
-### Qdrant
-- High performance
-- Rich filtering
-- Easy deployment
-
-## Use Cases
-
-1. **Semantic Search**: Find documents by meaning, not just keywords
-2. **Recommendation Engines**: Suggest similar items
-3. **Question Answering**: Build RAG systems
-4. **Anomaly Detection**: Identify unusual patterns
-
-## Getting Started
-
-\`\`\`python
-import pinecone
-
-# Initialize
-pinecone.init(api_key="your-api-key")
-index = pinecone.Index("my-index")
-
-# Insert vectors
-index.upsert([
-    ("id1", [0.1, 0.2, 0.3], {"text": "example"}),
-])
-
-# Query
-results = index.query([0.1, 0.2, 0.3], top_k=5)
-\`\`\`
-
-## Conclusion
-
-Vector databases are essential infrastructure for modern AI applications. Choose the right one for your needs and start building!
-    `,
-    date: "2025-09-15",
+    date: "2026-05-24",
     readTime: "6 min read",
     category: "Infrastructure",
     featured: false,
@@ -432,69 +201,99 @@ Vector databases are essential infrastructure for modern AI applications. Choose
     }
   },
   {
-    slug: "prompt-engineering-guide",
-    title: "The Complete Guide to Prompt Engineering",
-    excerpt: "Master the art of prompt engineering to get better results from AI models. Learn techniques, patterns, and best practices.",
+    slug: "ai-coding-workflows-2026",
+    title: "AI Coding Workflows in 2026: From Autocomplete to Agentic Pair Programming",
+    excerpt: "A practical guide to using AI coding assistants for planning, refactoring, testing, documentation, and pull request review.",
     content: `
-# The Complete Guide to Prompt Engineering
+# AI Coding Workflows in 2026
 
-Prompt engineering is the skill of crafting inputs that get the best outputs from AI models. Let's master it.
+AI coding assistants are no longer just autocomplete tools. Modern workflows combine chat, repository search, test execution, refactoring support, documentation updates, and automated pull request review.
 
-## Core Principles
+## Use AI Before Writing Code
 
-### 1. Be Specific
-Vague prompts get vague results. Be clear about what you want.
+The highest leverage step is often planning. Ask the assistant to map the relevant files, identify data flow, list assumptions, and suggest the smallest safe change. This reduces accidental edits and helps you understand the codebase faster.
 
-**Bad**: "Write about AI"
-**Good**: "Write a 500-word introduction to machine learning for beginners, focusing on practical applications"
+## Keep Changes Reviewable
 
-### 2. Provide Context
-Give the model information it needs to understand your request.
+Small, focused changes are still best. Use AI to make narrow edits, run tests, and explain the diff. Avoid asking for broad rewrites unless you have a clear acceptance criteria and enough test coverage.
 
-### 3. Use Examples
-Show the model what you want with examples (few-shot learning).
+## Strong Use Cases
 
-### 4. Iterate
-Refine your prompts based on results.
+AI pair programming works especially well for:
 
-## Advanced Techniques
+- **Finding relevant code** in unfamiliar repositories
+- **Writing tests** around existing behaviour
+- **Refactoring repetitive logic** while preserving interfaces
+- **Updating documentation** after code changes
+- **Reviewing diffs** for edge cases and missed imports
 
-### Chain of Thought
-Ask the model to explain its reasoning:
-"Let's think step by step..."
+## Watch for Failure Modes
 
-### Role Playing
-Assign the model a role:
-"You are an expert Python developer..."
+AI assistants can invent APIs, miss hidden dependencies, or overfit to nearby files. Verify generated code with tests, type checks, and manual review. For security-sensitive changes, inspect every line.
 
-### Output Formatting
-Specify the desired format:
-"Provide your answer as a JSON object with keys..."
+## Build Team Guidelines
 
-## Common Patterns
-
-1. **Instruction Following**: Clear, direct commands
-2. **Question Answering**: Structured questions with context
-3. **Text Transformation**: Specify input and desired output format
-4. **Creative Generation**: Provide style, tone, and constraints
-
-## Tools and Resources
-
-- OpenAI Playground
-- PromptBase
-- LangChain prompt templates
+Teams should agree on when AI-generated code is acceptable, how it should be reviewed, which data can be shared, and how to document meaningful AI-assisted changes in pull requests.
 
 ## Conclusion
 
-Prompt engineering is a skill that improves with practice. Experiment, iterate, and learn from results!
+The best AI coding workflow treats the assistant as a fast pair programmer, not an autopilot. Use it to accelerate understanding and implementation while keeping engineering judgement in control.
     `,
-    date: "2025-09-12",
-    readTime: "9 min read",
-    category: "Guide",
+    date: "2026-05-18",
+    readTime: "8 min read",
+    category: "Tools",
     featured: false,
     author: {
       name: "Lisa Martinez",
       avatar: "LM"
+    }
+  },
+  {
+    slug: "responsible-ai-governance-for-builders",
+    title: "Responsible AI Governance for Builders: Practical Guardrails That Ship",
+    excerpt: "Turn AI ethics into day-to-day engineering practices with risk tiers, evaluations, audit logs, privacy controls, and human oversight.",
+    content: `
+# Responsible AI Governance for Builders
+
+Responsible AI is moving from abstract principles to everyday product and engineering work. Teams need lightweight governance that helps them ship useful features without ignoring privacy, safety, fairness, and accountability.
+
+## Use Risk Tiers
+
+Not every AI feature needs the same level of review. A text summariser for public blog posts is different from an AI system that influences hiring, lending, healthcare, or legal outcomes. Define risk tiers and match each tier with appropriate checks.
+
+## Practical Guardrails
+
+Useful governance includes:
+
+- **Data minimisation** so prompts contain only what the model needs
+- **Permission checks** before retrieving or exposing private information
+- **Evaluation sets** for quality, bias, safety, and refusal behaviour
+- **Audit logs** for high-impact model decisions and tool calls
+- **Human oversight** for irreversible or sensitive actions
+
+## Make Limitations Visible
+
+Users should know when they are interacting with AI, what sources were used, and where uncertainty exists. Good interfaces make it easy to verify, correct, or reject AI output.
+
+## Review Vendors and Models
+
+Governance also applies to third-party AI services. Review data retention policies, regional hosting, model update practices, security certifications, and incident response commitments before sending sensitive workloads to a provider.
+
+## Keep Governance Iterative
+
+AI systems change as prompts, models, datasets, and user behaviour evolve. Re-run evaluations after updates and treat production feedback as part of the governance process.
+
+## Conclusion
+
+Responsible AI governance works best when it is built into the delivery process. Clear risk tiers, measurable checks, and visible accountability help teams move quickly without cutting corners.
+    `,
+    date: "2026-05-10",
+    readTime: "7 min read",
+    category: "Governance",
+    featured: false,
+    author: {
+      name: "Dr. Emily Watson",
+      avatar: "EW"
     }
   }
 ];
