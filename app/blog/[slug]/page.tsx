@@ -7,6 +7,7 @@ import { blogPosts } from "@/data/blogPosts";
 import { SITE_URL } from "@/lib/site";
 import BannerAd from "@/components/ads/BannerAd";
 import InArticleAd from "@/components/ads/InArticleAd";
+import TopicPoll from "@/components/TopicPoll";
 import SidebarAd from "@/components/ads/SidebarAd";
 
 export async function generateStaticParams() {
@@ -129,6 +130,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
             {/* Second In-Article Ad */}
             <InArticleAd />
+
+            <div className="mt-16">
+              <TopicPoll />
+            </div>
 
             {/* Share Section */}
             <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
