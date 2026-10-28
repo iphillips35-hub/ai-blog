@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Newsletter from "@/components/Newsletter";
 
 export const metadata: Metadata = {
-  title: "Newsletter | AI App Insights",
-  description: "Get practical AI tools, tutorials and insights delivered to your inbox every week.",
+  title: "Newsletter",
+  description: "One plain-English email a week on AI tools, website security and automation for UK small businesses.",
   alternates: { canonical: "/newsletter" },
 };
 

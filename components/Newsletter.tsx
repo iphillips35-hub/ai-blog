@@ -41,11 +41,11 @@ export default function Newsletter() {
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            Stay Updated with AI Insights
+            Practical AI for your business
           </h2>
           
           <p className="text-xl text-white/90">
-            Get the latest AI tools, tutorials, and industry insights delivered to your inbox every week.
+            One plain-English email a week: AI tools worth using, website security risks to watch, and simple automations that save time.
           </p>
 
           {status === "success" ? (

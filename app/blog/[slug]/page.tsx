@@ -18,7 +18,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const post = blogPosts.find((p) => p.slug === params.slug);
   if (!post) return {};
   return {
-    title: `${post.title} | AI App Insights`,
+    title: post.title,
     description: post.excerpt,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {

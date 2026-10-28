@@ -20,7 +20,7 @@ export function generateMetadata({ params }: Props): Metadata {
   const category = findCategory(params.category);
   if (!category) return {};
   return {
-    title: `${category} Articles | AI App Insights`,
+    title: `${category} Articles`,
     description: `Articles about ${category} for people building with AI.`,
     alternates: { canonical: `/blog/category/${params.category}` },
   };

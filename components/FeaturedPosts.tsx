@@ -10,10 +10,10 @@ export default function FeaturedPosts() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Featured Articles
+            Latest Articles
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Deep dives into AI development, tool reviews, and practical guides
+            Plain-English guides for small businesses, plus technical deep dives for builders
           </p>
         </div>
 
