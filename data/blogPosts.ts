@@ -16,144 +16,75 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "building-agentic-ai-apps-2026",
-    title: "Building Agentic AI Apps in 2026: From Chatbots to Reliable Workflows",
-    excerpt: "Move beyond simple chat interfaces with practical patterns for tool use, planning, memory, approvals, and monitoring in agentic AI applications.",
-    content: `
-# Building Agentic AI Apps in 2026
+    slug: "small-business-website-security-checklist",
+    title: "Small Business Website Security Checklist: 12 Checks You Can Do This Week",
+    excerpt:
+      "A plain-English checklist for UK small business owners: the settings, logins and updates that stop most website attacks, and how to check each one without a developer.",
+    content: `Most small business websites aren't hacked by someone who picked them out. They're found by automated tools that scan the internet day and night, looking for sites running old software or using weak logins. Being small doesn't keep you off the list. It usually means nobody is watching.
 
-AI products are moving from single-turn chatbots toward agentic workflows that can research, plan, call tools, update records, and ask for approval when confidence is low. The best systems do not simply let a model act freely; they combine model reasoning with product constraints, typed tools, observability, and human oversight.
+The good news is that most of the risk comes from a handful of things you can check yourself. Work through this list with a cup of tea and your website, hosting and domain logins to hand.
 
-## What Makes an App Agentic?
+## 1. Make sure every page uses HTTPS
 
-An agentic app can break a goal into steps, choose from available tools, inspect the result, and continue until it reaches a useful outcome. That might mean drafting a sales follow-up from CRM context, triaging support tickets, generating a pull request, or reconciling invoice data.
+Visit your site and look for the padlock in the address bar. Then type your address starting with **http://** (no "s") and check you're sent to the secure version automatically. If you're not, ask your host to switch on "force HTTPS". Most control panels have it as a single setting, and free certificates from Let's Encrypt renew themselves.
 
-## Core Architecture
+## 2. Check your PHP version
 
-Most reliable agentic systems include:
+WordPress, WooCommerce, Joomla, Drupal and many older custom sites run on PHP. **PHP 8.1 and older no longer get security fixes**, and PHP 8.2's security support ends at the end of 2026. Log in to your hosting control panel, find the PHP settings and aim for **8.3 or newer**. Take a backup first and check the site afterwards, because very old plugins sometimes break.
 
-- **A clear task boundary** so the model knows what it can and cannot do
-- **Typed tools** with strict inputs, outputs, and permission levels
-- **Short-term context** for the current task and long-term memory for durable facts
-- **Evaluation hooks** that measure success, cost, latency, and failure modes
-- **Human approval gates** for expensive, destructive, or sensitive actions
+## 3. Update the website software, plugins and themes
 
-## Designing Safer Tool Use
+Out-of-date plugins are the most common way into WordPress sites. Log in to your admin area and apply pending updates, and switch on automatic updates for minor releases if you can. If a plugin hasn't been updated by its developer in over a year, look for a maintained alternative.
 
-Treat every tool call like a production API integration. Validate inputs before execution, return structured errors, and avoid giving the model broad access to internal systems. For high-risk actions, generate a proposed action first and require a user confirmation before anything changes.
+## 4. Delete what you don't use
 
-## Planning Without Overengineering
+Every deactivated plugin, unused theme and forgotten test copy of your site (often at addresses like /old or /staging) is more code that can be attacked. If you're not using it, delete it rather than just switching it off.
 
-Not every task needs a long plan. Use lightweight planning when a task has multiple dependencies, uncertain data, or external side effects. For simpler requests, a direct answer or single tool call is faster and more reliable.
+## 5. Tidy up admin accounts
 
-## Monitoring Agents in Production
+Look at the list of users who can log in to your website. Remove former staff, old web designers and anyone you don't recognise. Give everyone else the lowest level of access they need, and make sure nobody's username is "admin".
 
-Log each step of the run, including model inputs, selected tools, tool outputs, cost, latency, and final status. This makes it possible to debug bad outcomes, improve prompts, and identify tools that need better schemas or clearer error messages.
+## 6. Turn on two-factor authentication
 
-## Conclusion
+Two-factor authentication (a code from an app on your phone as well as your password) stops most password-guessing attacks dead. Switch it on for your **website admin, hosting account, domain registrar and email**. If someone gets into your domain registrar, they can take over your website and email in one go.
 
-The most useful agentic products in 2026 are not magic black boxes. They are carefully scoped workflows where AI handles ambiguity while software engineering provides structure, safety, and repeatability.
-    `,
-    date: "2026-06-04",
-    readTime: "8 min read",
-    category: "Agents",
-    audience: "builders",
-    featured: true,
-    author: {
-      name: "Future Tech Blog",
-      avatar: "FT"
-    }
-  },
-  {
-    slug: "rag-evaluation-best-practices",
-    title: "RAG Evaluation Best Practices: How to Measure Retrieval Quality",
-    excerpt: "Learn how to evaluate retrieval-augmented generation systems with test sets, relevance metrics, answer groundedness, and regression checks.",
-    content: `
-# RAG Evaluation Best Practices
+## 7. Use a password manager
 
-Retrieval-augmented generation is now a default pattern for enterprise AI apps, but many teams still judge quality by reading a few sample answers. That is not enough for production. A reliable RAG system needs repeatable evaluation across retrieval, generation, and user experience.
+Reused passwords are how one leaked account becomes five. A password manager (Bitwarden, 1Password and the one built into your browser all work) creates and remembers a different strong password for each login.
 
-## Start With Real Questions
+## 8. Check your backups actually work
 
-Build an evaluation set from support tickets, search logs, sales calls, product documentation, and internal knowledge base queries. Synthetic questions can help fill gaps, but real user language reveals messy phrasing, missing context, and ambiguous intent.
+Ask your host three questions: how often is my site backed up, how long are backups kept, and are they stored somewhere other than the same server? Then try restoring one, or ask your host to show you how. A backup you've never restored is a hope, not a plan.
 
-## Measure Retrieval Separately
+## 9. Stop advertising your software versions
 
-Before judging the final answer, check whether the retriever found the right evidence. Track:
+Many sites announce exactly which server software, PHP version and WordPress version they run. That tells automated attack tools what to try. Your host or developer can usually hide these with a couple of settings.
 
-- **Recall**: did the system retrieve the documents needed to answer?
-- **Precision**: were the retrieved chunks actually relevant?
-- **Rank quality**: did the best evidence appear near the top?
-- **Coverage**: are important topics underrepresented in the index?
+## 10. Add basic security headers
 
-## Evaluate Grounded Answers
+Security headers are instructions your site sends to browsers, such as "only ever load me over HTTPS" (HSTS) or "don't let other sites show me inside a frame". They're invisible to visitors, and many hosts or security plugins can add them for you.
 
-A good RAG answer should be useful and grounded in the supplied context. Score whether the response answers the question, cites the correct source, avoids unsupported claims, and admits when the knowledge base does not contain enough information.
+## 11. Make sure you own your logins
 
-## Tune Chunking and Metadata
+Plenty of small businesses find out their domain, hosting or website is registered to a web designer who has since moved on. Check the domain is in **your** name and account, set it to auto-renew, and keep the hosting and website admin logins somewhere safe yourself.
 
-Chunk size, overlap, document structure, and metadata filters can matter more than the embedding model. Preserve headings, product names, dates, permissions, and source URLs so retrieved context is easier for the model to use.
+## 12. Protect your business email
 
-## Add Regression Tests
+Scammers can send emails that look like they come from your domain unless three DNS records, SPF, DKIM and DMARC, are set up. We explain them in plain English in [Stop scammers sending email as your business](/blog/spf-dkim-dmarc-small-business-email).
 
-Every update to prompts, indexes, embeddings, or rerankers can change behaviour. Keep a small high-value regression suite that runs in CI so quality does not drift after seemingly harmless changes.
+## If you think you've been hacked
 
-## Conclusion
+Change your hosting, website and email passwords from a clean device, turn on two-factor authentication, and contact your host. They can often restore a clean backup. If customer data may have been exposed, the ICO's website explains when you need to report a breach (within 72 hours for reportable breaches).
 
-RAG quality improves fastest when teams measure each stage independently. Retrieval, reranking, prompting, and answer generation all need their own feedback loops.
-    `,
-    date: "2026-06-02",
-    readTime: "9 min read",
-    category: "RAG",
-    audience: "builders",
-    featured: true,
-    author: {
-      name: "Future Tech Blog",
-      avatar: "FT"
-    }
-  },
-  {
-    slug: "multimodal-ai-product-design",
-    title: "Multimodal AI Product Design: Practical UX Patterns for Text, Image, Audio, and Video",
-    excerpt: "Design better AI features by combining text, screenshots, voice notes, documents, and video clips without overwhelming users.",
-    content: `
-# Multimodal AI Product Design
+## Get a quick outside view
 
-Multimodal models make it possible to reason across text, images, audio, documents, and video. The product challenge is deciding when those capabilities make the experience simpler rather than more complicated.
+If you'd like to know what your website reveals to anyone who visits, our sister service SecureSiteCheck runs a [free quick check](https://securesitecheck.co.uk/check). It looks at your PHP version (where visible), HTTPS, security headers, CMS version and server exposure, without testing or attacking anything. For a full review, SecureSiteCheck also offers fixed-price assessments.
 
-## Start With User Intent
-
-Do not add every input type just because the model supports it. Ask what the user is trying to accomplish. A screenshot may be better than a written bug report, a voice note may be faster than a form, and a document upload may be safer than copying sensitive text into a chat box.
-
-## Useful Multimodal Patterns
-
-Strong use cases include:
-
-- **Screenshot debugging** for UI issues, error messages, and layout problems
-- **Document understanding** for invoices, contracts, reports, and policies
-- **Voice-to-workflow** for field teams, clinicians, and mobile-first users
-- **Video summarisation** for meetings, training material, and customer research
-
-## Make Inputs Inspectable
-
-Users need to know what the model saw. Show uploaded files, extracted text, detected entities, timestamps, and image regions where appropriate. This builds trust and makes corrections easier.
-
-## Handle Uncertainty Clearly
-
-Multimodal systems can misread small text, low-quality audio, or visually ambiguous content. Provide confidence cues, ask clarifying questions, and make it easy for users to edit extracted information before it is used downstream.
-
-## Accessibility Matters
-
-Multimodal AI should improve accessibility, not reduce it. Support captions, transcripts, keyboard navigation, alt text, and readable summaries. Always provide a text fallback for important interactions.
-
-## Conclusion
-
-The best multimodal products use the right input at the right moment. They reduce friction, preserve user control, and make model interpretation visible.
-    `,
-    date: "2026-05-29",
+*Disclosure: SecureSiteCheck is run by the same team as Future Tech Blog.*`,
+    date: "2026-10-28",
     readTime: "7 min read",
-    category: "UX",
-    audience: "builders",
+    category: "Website Security",
+    audience: "business",
     featured: true,
     author: {
       name: "Future Tech Blog",
@@ -161,143 +92,164 @@ The best multimodal products use the right input at the right moment. They reduc
     }
   },
   {
-    slug: "local-llms-for-developers",
-    title: "Local LLMs for Developers: When to Run Models on Your Own Hardware",
-    excerpt: "Explore when local models make sense for privacy, latency, cost control, offline workflows, and prototyping.",
-    content: `
-# Local LLMs for Developers
+    slug: "ai-receptionist-uk-trades-costs-compared",
+    title: "AI Receptionists for UK Trades: What They Cost and Whether They're Worth It (2026)",
+    excerpt:
+      "Missed calls are missed jobs. We compare voicemail, a part-time receptionist and AI receptionists from IONOS and Robust AI, with real UK prices including VAT.",
+    content: `If you're a plumber, electrician, locksmith or builder, you already know the problem. The phone rings when you're under a sink, up a ladder or driving, and by the time you call back the customer has rung someone else.
 
-Local language models have become practical for more developer workflows. They are not always a replacement for frontier hosted models, but they are increasingly useful for private data, offline tools, repeatable tests, and cost-sensitive automation.
+An AI receptionist answers those calls for you, asks what the job is, takes the details and sends them to you. This guide covers what it costs in 2026, how it compares with the alternatives, and what to ask before you sign up.
 
-## When Local Models Shine
+## Your options for missed calls
 
-Local models are a strong fit when you need:
+### Voicemail
 
-- **Privacy** for code, documents, or customer data that should not leave the machine
-- **Low latency** for small tasks that run repeatedly
-- **Offline support** for field work or restricted environments
-- **Predictable costs** for high-volume internal workflows
-- **Experimentation** without sending every prompt to a hosted API
+Free, but plenty of callers won't leave a message, especially for urgent jobs. They'll just try the next number on Google. The ones who do leave a message often mumble the address or forget their number.
 
-## Trade-Offs to Consider
+### A part-time receptionist
 
-Hosted frontier models may still outperform local models on complex reasoning, long-context synthesis, and specialised multimodal tasks. Local models also require hardware planning, model management, quantisation choices, and operational updates.
+From April 2026 the National Living Wage is **£12.71 an hour** for workers aged 21 and over. Twenty hours a week works out at about **£1,100 a month** before holiday pay, employer pension and any employer National Insurance. That's good value if you have enough calls and admin to fill the hours, but it's a big step for a sole trader, and it still doesn't cover evenings and weekends.
 
-## Good Developer Use Cases
+### An AI receptionist
 
-Practical local workflows include code explanation, commit message drafting, log summarisation, test data generation, documentation cleanup, and first-pass classification. For high-stakes answers, combine local inference with review or escalation to a stronger hosted model.
+You set your mobile to divert calls you don't answer to an AI number. The AI answers with your business name, asks what the problem is, how urgent it is and where the customer is, then sends you the details. You keep your existing number and handset.
 
-## Hybrid Architectures
+## What AI receptionists cost in the UK
 
-Many teams use a hybrid approach: local models for quick private tasks, hosted models for complex reasoning, and routing rules based on risk, sensitivity, and cost. This gives teams flexibility without forcing every use case into one model.
+Prices below were checked on the providers' own websites in October 2026. If you're not VAT registered (most sole traders under the £90,000 threshold aren't), **you can't claim the VAT back**, so the VAT-inclusive price is what you really pay.
 
-## Conclusion
+### IONOS AI Receptionist
 
-Local LLMs are most valuable when they are matched to the right workload. Use them where privacy, speed, and control matter, and route harder tasks to stronger models when needed.
-    `,
-    date: "2026-05-24",
-    readTime: "6 min read",
-    category: "Infrastructure",
-    audience: "builders",
-    featured: false,
-    author: {
-      name: "Future Tech Blog",
-      avatar: "FT"
-    }
-  },
-  {
-    slug: "ai-coding-workflows-2026",
-    title: "AI Coding Workflows in 2026: From Autocomplete to Agentic Pair Programming",
-    excerpt: "A practical guide to using AI coding assistants for planning, refactoring, testing, documentation, and pull request review.",
-    content: `
-# AI Coding Workflows in 2026
+| Plan | Price ex VAT | Price inc VAT | Includes |
+|---|---|---|---|
+| Flex | £39/month | £46.80 | 30 calls, then 49p per call, 1 call forwarding |
+| Flex Pro | £69/month | £82.80 | 100 calls, then 39p per call, 5 forwardings, calendar booking |
+| Unlimited | £99/month | £118.80 | Unlimited calls, API, website widget, calendar booking |
 
-AI coding assistants are no longer just autocomplete tools. Modern workflows combine chat, repository search, test execution, refactoring support, documentation updates, and automated pull request review.
+All plans include a dedicated number, call summaries by email and a one-month free trial. Per-call charges add up: 60 calls a month on Flex costs £39 + (30 x 49p) = £53.70 ex VAT, or **£64.44 inc VAT**.
 
-## Use AI Before Writing Code
+### Robust AI
 
-The highest leverage step is often planning. Ask the assistant to map the relevant files, identify data flow, list assumptions, and suggest the smallest safe change. This reduces accidental edits and helps you understand the codebase faster.
+| Plan | Price | Includes |
+|---|---|---|
+| Core | £99/month, VAT included | Every missed call answered 24/7, AI number, job cards by SMS or WhatsApp, flat rate with no per-call fees |
 
-## Keep Changes Reviewable
+Diary booking (Google Calendar, Outlook or Cal.com) is an optional add-on, typically £20 to £30 a month. Robust AI is built specifically for trades and set up for you, and the first 10 businesses get a free month on real calls.
 
-Small, focused changes are still best. Use AI to make narrow edits, run tests, and explain the diff. Avoid asking for broad rewrites unless you have a clear acceptance criteria and enough test coverage.
+*Disclosure: Robust AI is run by the same team as Future Tech Blog.*
 
-## Strong Use Cases
+## Questions to ask before you sign up
 
-AI pair programming works especially well for:
+1. **What's the price including VAT?** Some providers quote ex VAT, which makes them look 20% cheaper than they are for most sole traders.
+2. **Are there per-call or per-minute charges?** Work out a busy month, not an average one.
+3. **How do I get the details?** An email summary is fine at a desk. On site, a text or WhatsApp message is far more useful.
+4. **Does it understand trade jobs?** Can it tell an emergency (water pouring through the ceiling) from a quote request (new bathroom next spring)?
+5. **Who sets it up?** Some services expect you to write the scripts yourself. Others do it for you.
+6. **Can I keep my number?** You should only need to change your phone's call divert setting, which takes a few minutes and can be switched off instantly.
+7. **Where is the data stored, and is it GDPR compliant?** Calls contain customers' names, numbers and addresses.
+8. **How easy is it to cancel?** Look for monthly rolling contracts and a free trial or money-back guarantee.
 
-- **Finding relevant code** in unfamiliar repositories
-- **Writing tests** around existing behaviour
-- **Refactoring repetitive logic** while preserving interfaces
-- **Updating documentation** after code changes
-- **Reviewing diffs** for edge cases and missed imports
+## Is it worth it?
 
-## Watch for Failure Modes
+The maths is simple. Think about what one typical job is worth to you in profit. If an AI receptionist wins you even one extra job a month that you would otherwise have lost, it has probably paid for itself.
 
-AI assistants can invent APIs, miss hidden dependencies, or overfit to nearby files. Verify generated code with tests, type checks, and manual review. For security-sensitive changes, inspect every line.
+It's also about time. Many sole traders don't want more work, they want fewer interruptions and fewer evenings returning calls. A good AI receptionist filters out time-wasters and sends you only the details you need, so your callbacks are shorter and more likely to turn into booked jobs.
 
-## Build Team Guidelines
+## Try one before you decide
 
-Teams should agree on when AI-generated code is acceptable, how it should be reviewed, which data can be shared, and how to document meaningful AI-assisted changes in pull requests.
-
-## Conclusion
-
-The best AI coding workflow treats the assistant as a fast pair programmer, not an autopilot. Use it to accelerate understanding and implementation while keeping engineering judgement in control.
-    `,
-    date: "2026-05-18",
-    readTime: "8 min read",
-    category: "Tools",
-    audience: "builders",
-    featured: false,
-    author: {
-      name: "Future Tech Blog",
-      avatar: "FT"
-    }
-  },
-  {
-    slug: "responsible-ai-governance-for-builders",
-    title: "Responsible AI Governance for Builders: Practical Guardrails That Ship",
-    excerpt: "Turn AI ethics into day-to-day engineering practices with risk tiers, evaluations, audit logs, privacy controls, and human oversight.",
-    content: `
-# Responsible AI Governance for Builders
-
-Responsible AI is moving from abstract principles to everyday product and engineering work. Teams need lightweight governance that helps them ship useful features without ignoring privacy, safety, fairness, and accountability.
-
-## Use Risk Tiers
-
-Not every AI feature needs the same level of review. A text summariser for public blog posts is different from an AI system that influences hiring, lending, healthcare, or legal outcomes. Define risk tiers and match each tier with appropriate checks.
-
-## Practical Guardrails
-
-Useful governance includes:
-
-- **Data minimisation** so prompts contain only what the model needs
-- **Permission checks** before retrieving or exposing private information
-- **Evaluation sets** for quality, bias, safety, and refusal behaviour
-- **Audit logs** for high-impact model decisions and tool calls
-- **Human oversight** for irreversible or sensitive actions
-
-## Make Limitations Visible
-
-Users should know when they are interacting with AI, what sources were used, and where uncertainty exists. Good interfaces make it easy to verify, correct, or reject AI output.
-
-## Review Vendors and Models
-
-Governance also applies to third-party AI services. Review data retention policies, regional hosting, model update practices, security certifications, and incident response commitments before sending sensitive workloads to a provider.
-
-## Keep Governance Iterative
-
-AI systems change as prompts, models, datasets, and user behaviour evolve. Re-run evaluations after updates and treat production feedback as part of the governance process.
-
-## Conclusion
-
-Responsible AI governance works best when it is built into the delivery process. Clear risk tiers, measurable checks, and visible accountability help teams move quickly without cutting corners.
-    `,
-    date: "2026-05-10",
+Both providers above let you try before you commit. IONOS has a public demo line on its website, and you can [talk to the Robust AI receptionist in your browser](https://robustai.co.uk), playing a customer with a burst pipe or a tripped fuse box. Five minutes of being an awkward customer will tell you more than any comparison table.`,
+    date: "2026-10-28",
     readTime: "7 min read",
-    category: "Governance",
-    audience: "builders",
-    featured: false,
+    category: "Phone & Calls",
+    audience: "business",
+    featured: true,
+    author: {
+      name: "Future Tech Blog",
+      avatar: "FT"
+    }
+  },
+  {
+    slug: "spf-dkim-dmarc-small-business-email",
+    title: "Stop Scammers Sending Email as Your Business: SPF, DKIM and DMARC in Plain English",
+    excerpt:
+      "Anyone can put your email address in the 'From' line. Three DNS records stop them, and help your real emails stay out of spam. Here's what they do and how to set them up.",
+    content: `Here's an uncomfortable fact: unless your domain is set up properly, anyone can send an email that appears to come from you@yourbusiness.co.uk. Scammers use this to send fake invoices to your customers, or "change of bank details" emails that look completely genuine.
+
+Three settings stop it: **SPF, DKIM and DMARC**. They also help your real emails land in inboxes instead of spam folders. They sound technical, but each one is a single line added to your domain's settings, and your email provider tells you exactly what to add.
+
+## Where these settings live
+
+All three are **DNS records**: small text entries stored wherever your domain's DNS is managed. That's usually your domain registrar (such as IONOS, GoDaddy or 123 Reg), your web host, or a service like Cloudflare. If you're not sure, the company that sends your domain renewal bill is a good place to start.
+
+## SPF: who is allowed to send email for you
+
+SPF (Sender Policy Framework) is a list of the services allowed to send email using your domain. When a receiving mail server gets a message "from" you, it checks whether the server that sent it is on your list.
+
+An SPF record is a TXT record that looks something like this:
+
+\`v=spf1 include:spf.protection.outlook.com include:_spf.google.com ~all\`
+
+- Each **include:** is a service allowed to send for you, such as Microsoft 365, Google Workspace, Zoho, or your newsletter tool.
+- **~all** at the end means "treat anything else as suspicious". **-all** is stricter: "reject anything else".
+
+Common mistakes:
+
+- **Having two SPF records.** You can only have one. Combine everything into a single line.
+- **Forgetting a service.** If your website's contact form, booking system or newsletter sends email as your domain, it needs to be included, or those emails may go to spam.
+- **Too many includes.** SPF allows a maximum of 10 DNS lookups, so remove services you no longer use.
+
+## DKIM: a tamper-proof signature
+
+DKIM (DomainKeys Identified Mail) adds a hidden digital signature to every email you send. The receiving server checks the signature against a public key in your DNS. If the email was forged or changed on the way, the check fails.
+
+You don't need to understand the cryptography. In your email provider's admin settings, look for "DKIM" or "domain authentication", switch it on, and copy the record (or records) it gives you into your DNS. Do the same in your newsletter tool if you use one.
+
+## DMARC: what to do when the checks fail
+
+DMARC ties SPF and DKIM together. It tells receiving servers what to do with an email that claims to be from you but fails the checks, and it can send you reports showing who is sending email using your domain.
+
+A DMARC record is a TXT record named **_dmarc** and looks like this:
+
+\`v=DMARC1; p=none; rua=mailto:dmarc-reports@yourbusiness.co.uk\`
+
+The important part is **p=**, the policy:
+
+- **p=none**: just monitor and send reports. Start here.
+- **p=quarantine**: send failing emails to spam.
+- **p=reject**: block failing emails completely. This is the goal.
+
+Start with **p=none** for a few weeks and read the reports (or use a free DMARC report service to make sense of them). Once you're sure all your genuine email passes, move to quarantine and then reject.
+
+## Why this matters more than it used to
+
+Since February 2024, Google and Yahoo have required everyone sending to Gmail and Yahoo addresses to have at least SPF or DKIM set up, and bulk senders (over 5,000 messages a day to Gmail) must have SPF, DKIM and DMARC. Even if you only send a few emails, setting up all three makes it much more likely your quotes and invoices reach your customers.
+
+## Don't forget domains you don't use for email
+
+Got a second domain that just points to your website, or an old one you're keeping hold of? Scammers can spoof those too. If a domain never sends email, add these two records to say so:
+
+- SPF: \`v=spf1 -all\`
+- DMARC (on **_dmarc**): \`v=DMARC1; p=reject;\`
+
+## A quick checklist
+
+1. Find out who manages your domain's DNS.
+2. List every service that sends email as your domain: your mailbox provider, website forms, booking system, newsletter tool.
+3. Create **one** SPF record that includes them all.
+4. Switch on DKIM in each service and add its records.
+5. Add a DMARC record with **p=none** and a reporting address.
+6. After a few weeks of clean reports, move to **p=quarantine**, then **p=reject**.
+
+## Check what your website and domain reveal
+
+Email security is one part of the picture. Our sister service SecureSiteCheck runs a [free quick check](https://securesitecheck.co.uk/check) that shows who appears to host your website, DNS and email, plus your HTTPS setup and security headers. For the rest, see our [small business website security checklist](/blog/small-business-website-security-checklist).
+
+*Disclosure: SecureSiteCheck is run by the same team as Future Tech Blog.*`,
+    date: "2026-10-28",
+    readTime: "7 min read",
+    category: "Email Security",
+    audience: "business",
+    featured: true,
     author: {
       name: "Future Tech Blog",
       avatar: "FT"

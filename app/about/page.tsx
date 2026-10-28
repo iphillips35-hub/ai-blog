@@ -64,10 +64,6 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-gray-600 dark:text-gray-400">
-              We also keep our older technical posts for developers under{" "}
-              <Link href="/blog" className="text-blue-600 dark:text-blue-400 underline">For builders</Link>.
-            </p>
           </div>
 
           <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-12 text-center space-y-6">

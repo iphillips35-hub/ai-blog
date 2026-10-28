@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
+import { marked } from "marked";
 import { blogPosts } from "@/data/blogPosts";
 import { SITE_URL } from "@/lib/site";
 import BannerAd from "@/components/ads/BannerAd";
@@ -29,6 +30,10 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       publishedTime: post.date,
     },
   };
+}
+
+function renderMarkdown(markdown: string): string {
+  return marked.parse(markdown, { async: false }) as string;
 }
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
@@ -108,7 +113,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <div 
                 className="text-gray-700 dark:text-gray-300 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: post.content.split('\n\n').slice(0, 3).join('\n\n').replace(/\n/g, '<br />') }}
+                dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content.split('\n\n').slice(0, 3).join('\n\n')) }}
               />
             </div>
 
@@ -118,7 +123,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <div 
                 className="text-gray-700 dark:text-gray-300 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: post.content.split('\n\n').slice(3).join('\n\n').replace(/\n/g, '<br />') }}
+                dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content.split('\n\n').slice(3).join('\n\n')) }}
               />
             </div>
 

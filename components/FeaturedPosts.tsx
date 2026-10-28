@@ -13,7 +13,7 @@ export default function FeaturedPosts() {
             Latest Articles
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Plain-English guides for small businesses, plus technical deep dives for builders
+            Plain-English guides to AI, website security and automation for UK small businesses
           </p>
         </div>
 
