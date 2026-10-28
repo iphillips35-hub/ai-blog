@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Calendar, Clock, ArrowLeft, Share2 } from "lucide-react";
+import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
+import { SITE_URL } from "@/lib/site";
 import BannerAd from "@/components/ads/BannerAd";
 import InArticleAd from "@/components/ads/InArticleAd";
 import SidebarAd from "@/components/ads/SidebarAd";
@@ -12,12 +14,32 @@ export async function generateStaticParams() {
   }));
 }
 
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const post = blogPosts.find((p) => p.slug === params.slug);
+  if (!post) return {};
+  return {
+    title: `${post.title} | AI App Insights`,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      publishedTime: post.date,
+    },
+  };
+}
+
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = blogPosts.find((p) => p.slug === params.slug);
 
   if (!post) {
     notFound();
   }
+
+  const postUrl = encodeURIComponent(`${SITE_URL}/blog/${post.slug}`);
+  const postTitle = encodeURIComponent(post.title);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -69,10 +91,6 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                     </div>
                   </div>
                 </div>
-
-                <button className="p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                  <Share2 className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                </button>
               </div>
             </div>
           </div>
@@ -113,15 +131,22 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               Share this article
             </h3>
             <div className="flex space-x-4">
-              <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                Twitter
-              </button>
-              <button className="px-6 py-3 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition-colors">
+              <a
+                href={`https://x.com/intent/post?url=${postUrl}&text=${postTitle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                X / Twitter
+              </a>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition-colors"
+              >
                 LinkedIn
-              </button>
-              <button className="px-6 py-3 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
-                Copy Link
-              </button>
+              </a>
             </div>
           </div>
 

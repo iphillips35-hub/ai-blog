@@ -5,18 +5,31 @@ import { Mail, CheckCircle } from "lucide-react";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    
-    // Simulate API call
-    setTimeout(() => {
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, company }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again later.");
+      }
       setStatus("success");
       setEmail("");
-      setTimeout(() => setStatus("idle"), 3000);
-    }, 1000);
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "Something went wrong. Please try again later.");
+    }
   };
 
   return (
@@ -50,6 +63,16 @@ export default function Newsletter() {
                 required
                 className="flex-1 px-6 py-4 rounded-xl bg-white/90 backdrop-blur-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white"
               />
+              <input
+                type="text"
+                name="company"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
               <button
                 type="submit"
                 disabled={status === "loading"}
@@ -60,8 +83,14 @@ export default function Newsletter() {
             </form>
           )}
 
+          {status === "error" && (
+            <p role="alert" className="text-white font-semibold">
+              {errorMessage}
+            </p>
+          )}
+
           <p className="text-sm text-white/80">
-            Join 10,000+ developers and AI enthusiasts. Unsubscribe anytime.
+            One email a week, no spam. Unsubscribe anytime.
           </p>
         </div>
       </div>

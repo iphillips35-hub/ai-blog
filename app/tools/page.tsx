@@ -1,103 +1,12 @@
-import { Cpu, Sparkles, Zap, Code, Brain, MessageSquare, Image, Database, GitBranch, Layers, Box, Workflow } from "lucide-react";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { tools } from "@/data/tools";
 
-const tools = [
-  {
-    name: "GPT-4",
-    description: "OpenAI's most advanced language model for natural conversations, complex reasoning, and creative tasks",
-    icon: MessageSquare,
-    color: "from-green-500 to-emerald-600",
-    category: "LLM",
-    link: "https://openai.com/gpt-4"
-  },
-  {
-    name: "Claude",
-    description: "Anthropic's constitutional AI for safe, helpful conversations with strong reasoning capabilities",
-    icon: Brain,
-    color: "from-orange-500 to-red-600",
-    category: "LLM",
-    link: "https://claude.ai"
-  },
-  {
-    name: "Midjourney",
-    description: "AI-powered image generation for stunning visual content from text descriptions",
-    icon: Sparkles,
-    color: "from-purple-500 to-pink-600",
-    category: "Image Gen",
-    link: "https://midjourney.com"
-  },
-  {
-    name: "Stable Diffusion",
-    description: "Open-source text-to-image model for creative projects with full control and customization",
-    icon: Image,
-    color: "from-yellow-500 to-orange-600",
-    category: "Image Gen",
-    link: "https://stability.ai"
-  },
-  {
-    name: "GitHub Copilot",
-    description: "AI pair programmer that suggests code and entire functions in real-time across multiple languages",
-    icon: Code,
-    color: "from-blue-500 to-cyan-600",
-    category: "Dev Tools",
-    link: "https://github.com/features/copilot"
-  },
-  {
-    name: "Cursor",
-    description: "AI-first code editor built for pair programming with AI, featuring natural language editing",
-    icon: GitBranch,
-    color: "from-indigo-500 to-blue-600",
-    category: "Dev Tools",
-    link: "https://cursor.sh"
-  },
-  {
-    name: "TensorFlow",
-    description: "End-to-end open-source platform for machine learning with comprehensive ecosystem",
-    icon: Cpu,
-    color: "from-indigo-500 to-purple-600",
-    category: "Framework",
-    link: "https://tensorflow.org"
-  },
-  {
-    name: "PyTorch",
-    description: "Open-source machine learning framework with dynamic computation graphs and Python-first approach",
-    icon: Zap,
-    color: "from-red-500 to-orange-600",
-    category: "Framework",
-    link: "https://pytorch.org"
-  },
-  {
-    name: "LangChain",
-    description: "Framework for developing applications powered by language models with chains and agents",
-    icon: Workflow,
-    color: "from-green-500 to-teal-600",
-    category: "Framework",
-    link: "https://langchain.com"
-  },
-  {
-    name: "Pinecone",
-    description: "Vector database optimized for AI applications, semantic search, and recommendation systems",
-    icon: Database,
-    color: "from-blue-500 to-purple-600",
-    category: "Infrastructure",
-    link: "https://pinecone.io"
-  },
-  {
-    name: "Weaviate",
-    description: "Open-source vector database with GraphQL API and hybrid search capabilities",
-    icon: Layers,
-    color: "from-teal-500 to-green-600",
-    category: "Infrastructure",
-    link: "https://weaviate.io"
-  },
-  {
-    name: "Hugging Face",
-    description: "Platform for sharing and deploying machine learning models with thousands of pre-trained options",
-    icon: Box,
-    color: "from-yellow-500 to-red-600",
-    category: "Platform",
-    link: "https://huggingface.co"
-  }
-];
+export const metadata: Metadata = {
+  title: "AI Tools Directory | AI App Insights",
+  description: "The AI assistants, automation platforms, voice AI and developer tools worth knowing about.",
+  alternates: { canonical: "/tools" },
+};
 
 const categories = Array.from(new Set(tools.map(tool => tool.category)));
 
@@ -112,7 +21,7 @@ export default function ToolsPage() {
               AI Tools Directory
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Discover the most powerful tools for building AI applications
+              The AI assistants, automation platforms and developer tools worth knowing about
             </p>
           </div>
         </div>
@@ -185,14 +94,17 @@ export default function ToolsPage() {
       <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Want to suggest a tool?
+            Never miss a useful tool
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Know an amazing AI tool that should be featured? Let us know!
+            We test new AI tools every week and share the ones worth your time.
           </p>
-          <button className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all">
-            Submit a Tool
-          </button>
+          <Link
+            href="/newsletter"
+            className="inline-block bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all"
+          >
+            Get new tools by email
+          </Link>
         </div>
       </div>
     </div>

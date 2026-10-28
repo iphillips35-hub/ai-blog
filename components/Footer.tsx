@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { Github, Twitter, Linkedin, Mail, Sparkles } from "lucide-react";
+import { Mail, Sparkles } from "lucide-react";
+import { categorySlug, getCategories } from "@/data/blogPosts";
 
 export default function Footer() {
+  const categories = getCategories();
+
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -41,8 +44,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Contact
+                <Link href="/newsletter" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  Newsletter
                 </Link>
               </li>
             </ul>
@@ -52,64 +55,32 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">Categories</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/blog/category/tutorials" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Tutorials
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog/category/tools" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Tool Reviews
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog/category/news" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  AI News
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog/category/guides" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Guides
-                </Link>
-              </li>
+              {categories.map((category) => (
+                <li key={category}>
+                  <Link
+                    href={`/blog/category/${categorySlug(category)}`}
+                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    {category}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Social */}
+          {/* Newsletter */}
           <div>
-            <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">Connect</h3>
-            <div className="flex space-x-4">
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-blue-500 hover:text-white transition-all"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://github.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-700 hover:text-white transition-all"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-blue-700 hover:text-white transition-all"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a 
-                href="mailto:hello@aiappinsights.com"
-                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-purple-600 hover:text-white transition-all"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
+            <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">Stay Updated</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Practical AI tools and guides, once a week.
+            </p>
+            <Link
+              href="/newsletter"
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold hover:shadow-lg transition-all"
+            >
+              <Mail className="w-4 h-4" />
+              <span>Subscribe</span>
+            </Link>
           </div>
         </div>
 

@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
-import { blogPosts } from "@/data/blogPosts";
+import { blogPosts, categorySlug, getCategories } from "@/data/blogPosts";
 import BannerAd from "@/components/ads/BannerAd";
 import NativeAd from "@/components/ads/NativeAd";
 
 export default function BlogPage() {
-  const categories = Array.from(new Set(blogPosts.map(post => post.category)));
+  const categories = getCategories();
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -36,7 +36,7 @@ export default function BlogPage() {
             {categories.map(category => (
               <Link
                 key={category}
-                href={`/blog/category/${category.toLowerCase()}`}
+                href={`/blog/category/${categorySlug(category)}`}
                 className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
               >
                 {category}
