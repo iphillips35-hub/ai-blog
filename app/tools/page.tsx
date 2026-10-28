@@ -10,7 +10,16 @@ export const metadata: Metadata = {
 
 const categories = Array.from(new Set(tools.map(tool => tool.category)));
 
-export default function ToolsPage() {
+type Props = { searchParams: { category?: string } };
+
+export default function ToolsPage({ searchParams }: Props) {
+  const active = categories.find(c => c === searchParams.category);
+  const visibleTools = active ? tools.filter(tool => tool.category === active) : tools;
+  const tabClass = (selected: boolean) =>
+    selected
+      ? "px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold whitespace-nowrap"
+      : "px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors whitespace-nowrap";
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
@@ -31,16 +40,19 @@ export default function ToolsPage() {
       <div className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 sticky top-16 z-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-4 overflow-x-auto py-4">
-            <button className="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold whitespace-nowrap">
+            <Link href="/tools" scroll={false} className={tabClass(!active)} aria-current={!active ? "page" : undefined}>
               All Tools
-            </button>
+            </Link>
             {categories.map(category => (
-              <button
+              <Link
                 key={category}
-                className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
+                href={`/tools?category=${encodeURIComponent(category)}`}
+                scroll={false}
+                className={tabClass(active === category)}
+                aria-current={active === category ? "page" : undefined}
               >
                 {category}
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -49,7 +61,7 @@ export default function ToolsPage() {
       {/* Tools Grid */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool, index) => {
+          {visibleTools.map((tool, index) => {
             const Icon = tool.icon;
             return (
               <a
