@@ -57,7 +57,7 @@ export async function POST(request: Request) {
   const sent = await sendEmail(config.apiKey, NOTIFY_EMAIL, `Poll vote: ${topic.slice(0, 60)}`, html, email || undefined);
   const subscribed = email ? await addToNewsletter(config.apiKey, config.listId, email, CONSENT) : true;
 
-  if (!sent && !subscribed) {
+  if (!sent && !(email && subscribed)) {
     return NextResponse.json({ error: "Something went wrong. Please try again later." }, { status: 502 });
   }
   return NextResponse.json({ ok: true });
