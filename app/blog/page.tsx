@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { blogPosts, categorySlug, getCategories } from "@/data/blogPosts";
-import BannerAd from "@/components/ads/BannerAd";
-import NativeAd from "@/components/ads/NativeAd";
 
 export const metadata: Metadata = {
   title: "Guides",
@@ -59,20 +57,12 @@ export default function BlogPage() {
         </div>
       </div>
 
-      {/* Top Banner Ad */}
-      <BannerAd position="top" />
-
       {/* Blog Posts */}
-      {sections.map((section, sectionIndex) => {
+      {sections.map((section) => {
         const posts = blogPosts.filter(post => post.audience === section.audience);
         if (posts.length === 0) return null;
         return (
           <Fragment key={section.audience}>
-            {sectionIndex > 0 && (
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <NativeAd />
-              </div>
-            )}
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
               <div className="mb-8">
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{section.title}</h2>

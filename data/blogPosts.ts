@@ -1,3 +1,5 @@
+import type { ServiceId } from "@/components/BusinessHelp";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -7,6 +9,7 @@ export interface BlogPost {
   readTime: string;
   category: string;
   audience: "business" | "builders";
+  help?: ServiceId;
   featured: boolean;
   author: {
     name: string;
@@ -85,6 +88,7 @@ If you'd like to know what your website reveals to anyone who visits, our sister
     readTime: "7 min read",
     category: "Website Security",
     audience: "business",
+    help: "securesitecheck",
     featured: true,
     author: {
       name: "Future Tech Blog",
@@ -162,6 +166,7 @@ Both providers above let you try before you commit. IONOS has a public demo line
     readTime: "7 min read",
     category: "Phone & Calls",
     audience: "business",
+    help: "robustai",
     featured: true,
     author: {
       name: "Future Tech Blog",
@@ -249,6 +254,7 @@ Email security is one part of the picture. Our sister service SecureSiteCheck ru
     readTime: "7 min read",
     category: "Email Security",
     audience: "business",
+    help: "securesitecheck",
     featured: true,
     author: {
       name: "Future Tech Blog",
