@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, Zap, TrendingUp } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -51,30 +51,6 @@ export default function Hero() {
             </Link>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 pt-12 max-w-2xl mx-auto">
-            <div className="space-y-2">
-              <div className="flex items-center justify-center">
-                <Zap className="w-6 h-6 text-yellow-500" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white">50+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">AI Tools Reviewed</div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-green-500" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white">100+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Tutorials Published</div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-purple-500" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white">10K+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Community Members</div>
-            </div>
-          </div>
         </div>
       </div>
 

@@ -297,3 +297,11 @@ Responsible AI governance works best when it is built into the delivery process.
     }
   }
 ];
+
+export function categorySlug(category: string): string {
+  return category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+export function getCategories(): string[] {
+  return Array.from(new Set(blogPosts.map((post) => post.category)));
+}

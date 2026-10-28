@@ -3,11 +3,19 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "AI App Insights - Building the Future with AI",
   description: "Explore the latest tools, techniques, and insights for building cutting-edge AI applications",
   keywords: ["AI", "Machine Learning", "AI Apps", "AI Tools", "Development"],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+  },
 };
 
 export default function RootLayout({

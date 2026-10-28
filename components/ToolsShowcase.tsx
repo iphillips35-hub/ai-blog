@@ -1,50 +1,7 @@
 import Link from "next/link";
-import { Cpu, Sparkles, Zap, Code, Brain, MessageSquare } from "lucide-react";
+import { tools } from "@/data/tools";
 
-const tools = [
-  {
-    name: "GPT-4",
-    description: "Advanced language model for natural conversations and complex tasks",
-    icon: MessageSquare,
-    color: "from-green-500 to-emerald-600",
-    category: "LLM"
-  },
-  {
-    name: "Midjourney",
-    description: "AI-powered image generation for stunning visual content",
-    icon: Sparkles,
-    color: "from-purple-500 to-pink-600",
-    category: "Image Gen"
-  },
-  {
-    name: "GitHub Copilot",
-    description: "AI pair programmer that helps you write better code faster",
-    icon: Code,
-    color: "from-blue-500 to-cyan-600",
-    category: "Dev Tools"
-  },
-  {
-    name: "Claude",
-    description: "Constitutional AI for safe and helpful conversations",
-    icon: Brain,
-    color: "from-orange-500 to-red-600",
-    category: "LLM"
-  },
-  {
-    name: "Stable Diffusion",
-    description: "Open-source text-to-image model for creative projects",
-    icon: Zap,
-    color: "from-yellow-500 to-orange-600",
-    category: "Image Gen"
-  },
-  {
-    name: "TensorFlow",
-    description: "End-to-end platform for building ML applications",
-    icon: Cpu,
-    color: "from-indigo-500 to-purple-600",
-    category: "Framework"
-  }
-];
+const featuredTools = tools.filter((tool) => tool.featured);
 
 export default function ToolsShowcase() {
   return (
@@ -60,12 +17,15 @@ export default function ToolsShowcase() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool, index) => {
+          {featuredTools.map((tool) => {
             const Icon = tool.icon;
             return (
-              <div
-                key={index}
-                className="group bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
+              <a
+                key={tool.name}
+                href={tool.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
                 <div className="flex items-start space-x-4">
                   <div className={`bg-gradient-to-br ${tool.color} p-3 rounded-lg group-hover:scale-110 transition-transform`}>
@@ -85,7 +45,7 @@ export default function ToolsShowcase() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </a>
             );
           })}
         </div>
