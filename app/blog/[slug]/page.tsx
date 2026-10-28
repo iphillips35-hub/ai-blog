@@ -5,10 +5,8 @@ import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { marked } from "marked";
 import { blogPosts } from "@/data/blogPosts";
 import { SITE_URL } from "@/lib/site";
-import BannerAd from "@/components/ads/BannerAd";
-import InArticleAd from "@/components/ads/InArticleAd";
 import TopicPoll from "@/components/TopicPoll";
-import SidebarAd from "@/components/ads/SidebarAd";
+import PostHelpBox from "@/components/PostHelpBox";
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -103,33 +101,23 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </div>
       </div>
 
-      {/* Top Banner Ad */}
-      <BannerAd position="top" />
-
       {/* Content */}
       <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 lg:col-start-3">
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <div 
+              <div
                 className="text-gray-700 dark:text-gray-300 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content.split('\n\n').slice(0, 3).join('\n\n')) }}
+                dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
               />
             </div>
 
-            {/* First In-Article Ad */}
-            <InArticleAd />
-
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <div 
-                className="text-gray-700 dark:text-gray-300 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content.split('\n\n').slice(3).join('\n\n')) }}
-              />
-            </div>
-
-            {/* Second In-Article Ad */}
-            <InArticleAd />
+            {post.help && (
+              <div className="mt-12">
+                <PostHelpBox service={post.help} />
+              </div>
+            )}
 
             <div className="mt-16">
               <TopicPoll />
@@ -187,15 +175,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
 
-          {/* Sidebar with Ads */}
-          <aside className="lg:col-span-4 hidden lg:block">
-            <SidebarAd />
-          </aside>
         </div>
       </article>
 
-      {/* Bottom Banner Ad */}
-      <BannerAd position="bottom" />
     </div>
   );
 }

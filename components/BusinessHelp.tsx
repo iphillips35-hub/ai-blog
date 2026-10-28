@@ -1,7 +1,8 @@
 import { PhoneCall, ShieldCheck } from "lucide-react";
 
-const services = [
+export const services = [
   {
+    id: "securesitecheck",
     name: "SecureSiteCheck",
     icon: ShieldCheck,
     description:
@@ -10,6 +11,7 @@ const services = [
     href: "https://securesitecheck.co.uk/check",
   },
   {
+    id: "robustai",
     name: "Robust AI",
     icon: PhoneCall,
     description:
@@ -17,7 +19,9 @@ const services = [
     cta: "See how it works",
     href: "https://robustai.co.uk",
   },
-];
+] as const;
+
+export type ServiceId = (typeof services)[number]["id"];
 
 export default function BusinessHelp() {
   return (
