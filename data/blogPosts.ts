@@ -6,6 +6,7 @@ export interface BlogPost {
   date: string;
   readTime: string;
   category: string;
+  audience: "business" | "builders";
   featured: boolean;
   author: {
     name: string;
@@ -56,10 +57,11 @@ The most useful agentic products in 2026 are not magic black boxes. They are car
     date: "2026-06-04",
     readTime: "8 min read",
     category: "Agents",
+    audience: "builders",
     featured: true,
     author: {
-      name: "Alex Johnson",
-      avatar: "AJ"
+      name: "Future Tech Blog",
+      avatar: "FT"
     }
   },
   {
@@ -103,10 +105,11 @@ RAG quality improves fastest when teams measure each stage independently. Retrie
     date: "2026-06-02",
     readTime: "9 min read",
     category: "RAG",
+    audience: "builders",
     featured: true,
     author: {
-      name: "Sarah Chen",
-      avatar: "SC"
+      name: "Future Tech Blog",
+      avatar: "FT"
     }
   },
   {
@@ -150,10 +153,11 @@ The best multimodal products use the right input at the right moment. They reduc
     date: "2026-05-29",
     readTime: "7 min read",
     category: "UX",
+    audience: "builders",
     featured: true,
     author: {
-      name: "Michael Torres",
-      avatar: "MT"
+      name: "Future Tech Blog",
+      avatar: "FT"
     }
   },
   {
@@ -194,10 +198,11 @@ Local LLMs are most valuable when they are matched to the right workload. Use th
     date: "2026-05-24",
     readTime: "6 min read",
     category: "Infrastructure",
+    audience: "builders",
     featured: false,
     author: {
-      name: "David Kim",
-      avatar: "DK"
+      name: "Future Tech Blog",
+      avatar: "FT"
     }
   },
   {
@@ -242,10 +247,11 @@ The best AI coding workflow treats the assistant as a fast pair programmer, not 
     date: "2026-05-18",
     readTime: "8 min read",
     category: "Tools",
+    audience: "builders",
     featured: false,
     author: {
-      name: "Lisa Martinez",
-      avatar: "LM"
+      name: "Future Tech Blog",
+      avatar: "FT"
     }
   },
   {
@@ -290,10 +296,11 @@ Responsible AI governance works best when it is built into the delivery process.
     date: "2026-05-10",
     readTime: "7 min read",
     category: "Governance",
+    audience: "builders",
     featured: false,
     author: {
-      name: "Dr. Emily Watson",
-      avatar: "EW"
+      name: "Future Tech Blog",
+      avatar: "FT"
     }
   }
 ];

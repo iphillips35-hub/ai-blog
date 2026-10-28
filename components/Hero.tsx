@@ -17,43 +17,41 @@ export default function Hero() {
           <div className="inline-flex items-center space-x-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700">
             <Sparkles className="w-4 h-4 text-purple-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Building the Future with AI
+              AI for UK small businesses
             </span>
           </div>
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
-            Master the Art of{" "}
+            Practical AI for{" "}
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              AI Development
+              small businesses
             </span>
           </h1>
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Discover cutting-edge tools, learn best practices, and stay ahead in the rapidly evolving world of AI application development.
+            Plain-English guides for UK trades, shops and small firms: which AI tools are worth paying for, how to keep your website safe, and simple automations that save hours.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Link 
+            <Link
               href="/blog"
               className="group inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all"
             >
-              <span>Explore Articles</span>
+              <span>Read the guides</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link 
-              href="/tools"
+            <a
+              href="https://securesitecheck.co.uk/check"
               className="inline-flex items-center space-x-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-8 py-4 rounded-xl font-semibold border-2 border-gray-200 dark:border-gray-700 hover:border-purple-600 dark:hover:border-purple-500 hover:shadow-xl transition-all"
             >
-              <span>Browse Tools</span>
-            </Link>
+              <span>Free website security check</span>
+            </a>
           </div>
-
         </div>
       </div>
-
     </section>
   );
 }

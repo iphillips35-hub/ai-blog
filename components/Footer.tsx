@@ -16,11 +16,11 @@ export default function Footer() {
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                AI App Insights
+                Future Tech Blog
               </span>
             </Link>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Your guide to building cutting-edge AI applications and discovering the latest tools.
+              Plain-English AI, website security and automation guides for UK small businesses.
             </p>
           </div>
 
@@ -85,7 +85,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400">
-          <p>&copy; {new Date().getFullYear()} AI App Insights. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Future Tech Blog. All rights reserved.</p>
         </div>
       </div>
     </footer>

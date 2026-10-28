@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { tools } from "@/data/tools";
 
 export const metadata: Metadata = {
-  title: "AI Tools Directory | AI App Insights",
+  title: "AI Tools Directory",
   description: "The AI assistants, automation platforms, voice AI and developer tools worth knowing about.",
   alternates: { canonical: "/tools" },
 };
@@ -109,7 +109,7 @@ export default function ToolsPage({ searchParams }: Props) {
             Never miss a useful tool
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            We test new AI tools every week and share the ones worth your time.
+            Get the AI tools worth a small business&apos;s time, explained in plain English.
           </p>
           <Link
             href="/newsletter"
