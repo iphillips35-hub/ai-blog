@@ -19,6 +19,73 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "php2shell-what-small-businesses-need-to-do",
+    title: "PHP2Shell: What the Big PHP Security Flaw Means for Your Small Business Website",
+    excerpt:
+      "Critical flaws in PHP, the software behind most small business websites, were fixed on 21 October and are now being exploited. Here's what it means in plain English, and the three things to do this week.",
+    content: `In late October, a security story about something called **PHP** made headlines on the BBC, Reuters and the Guardian. Researchers using AI found two critical flaws, now nicknamed **"PHP2Shell"**, and some organisations, including government websites, took their sites offline while they patched.
+
+If you run a small business website, there's a good chance it runs on PHP. Here's what happened and what to do, without the jargon.
+
+## What is PHP?
+
+PHP is the software that runs behind the scenes on most websites. It builds the pages, talks to the database and handles forms. **WordPress, WooCommerce, Joomla, Drupal and many older custom-built sites all run on PHP.** You never see it, but your web host runs a particular version of it for your site.
+
+## What happened?
+
+- **21 October 2026:** PHP released fixes for two critical flaws, CVE-2026-109618 and CVE-2026-109619. In the worst case, they can let an attacker run commands on a web server **without needing a password**. One is scored 9.8 out of 10 for severity.
+- **26 October 2026:** the US government's cyber agency (CISA) added both flaws to its list of vulnerabilities that attackers are **actively exploiting**.
+- **The UK's National Cyber Security Centre (NCSC)** urged UK organisations to act immediately. It said organisations on any version of PHP are affected, and anyone on an older version should move to one that's still supported.
+
+## Does it affect my website?
+
+If your site runs on PHP, assume yes until your host confirms otherwise. The fixed versions are:
+
+| PHP version line | Fixed in |
+|---|---|
+| 8.5 | 8.5.12 |
+| 8.4 | 8.4.27 |
+| 8.3 | 8.3.36 |
+| 8.2 | 8.2.35 |
+
+**If your site runs PHP 8.1, 8.0, 7.x or 5.x, there is no fix for your version.** Those versions stopped getting security updates years ago, so the only real fix is to move to a supported version.
+
+## Three things to do this week
+
+### 1. Find out which PHP version your site runs
+
+Log in to your hosting control panel (cPanel, Plesk, IONOS, 123 Reg and so on) and look for "PHP version" or "PHP settings". If you can't find it, ask your host or web designer: "Which PHP version is my website on, and has the PHP2Shell fix been applied?"
+
+### 2. Update, or ask your host to
+
+- **On 8.2 to 8.5:** make sure the server has the fixed version above. Most managed hosts patch this for you, but it's worth checking.
+- **On anything older:** move to **PHP 8.3 or newer**. Take a full backup first, then check the site afterwards. Very old plugins or themes sometimes break, so be ready to update or replace them.
+
+### 3. Update everything else while you're there
+
+Old PHP usually goes hand in hand with old WordPress plugins and themes. Apply pending updates, remove plugins you don't use, and check that your admin logins use strong passwords and two-factor authentication. Our [website security checklist](/blog/small-business-website-security-checklist) walks you through the rest.
+
+## What if my site has been hacked?
+
+Warning signs include pages you didn't create, strange redirects, new admin users, or a warning from Google or your host. If you see any of these, contact your host straight away, change all your passwords, and restore from a clean backup if you have one. The NCSC also has free guidance on what to do after an attack.
+
+## The bigger picture
+
+AI is making it faster to find flaws in widely used software, and to turn them into attacks. Expect more stories like this one. The businesses that come off best aren't the ones with the biggest budgets. They're the ones that keep their software up to date and know what their website runs on.
+
+*Sources: PHP's official release notes, the US CISA Known Exploited Vulnerabilities catalogue and NCSC guidance, all checked on 28 October 2026. Details may change as the story develops.*`,
+    date: "2026-10-28",
+    readTime: "5 min read",
+    category: "Website Security",
+    audience: "business",
+    help: "securesitecheck",
+    featured: true,
+    author: {
+      name: "Future Tech Blog",
+      avatar: "FT"
+    }
+  },
+  {
     slug: "small-business-website-security-checklist",
     title: "Small Business Website Security Checklist: 12 Checks You Can Do This Week",
     excerpt:
