@@ -8,7 +8,7 @@ import NativeAd from "@/components/ads/NativeAd";
 
 export const metadata: Metadata = {
   title: "Guides",
-  description: "Plain-English guides to AI tools, website security and automation for UK small businesses, plus technical posts for builders.",
+  description: "Plain-English guides to AI tools, website security and automation for UK small businesses.",
   alternates: { canonical: "/blog" },
 };
 
@@ -30,7 +30,7 @@ export default function BlogPage() {
               Guides
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Practical AI, website security and automation for small businesses, plus technical posts for builders
+              Practical AI, website security and automation for UK small businesses
             </p>
           </div>
         </div>
