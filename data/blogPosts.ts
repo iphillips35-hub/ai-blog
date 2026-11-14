@@ -19,6 +19,96 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "microsoft-365-outage-november-2026-small-business-lessons",
+    title: "The Microsoft 365 Outage: What Happened and 5 Things Small Businesses Should Do Now",
+    excerpt:
+      "Outlook, Teams and Copilot went down for almost 24 hours on 12 to 13 November. Here's what happened in plain English, what to check now that it's back, and how to be ready for next time.",
+    content: `On Thursday evening, 12 November, Microsoft 365 went down around the world. **Outlook email, Teams and the Copilot AI assistant** were unavailable in at least 70 countries, and for many businesses the disruption lasted most of Friday. GP surgeries, police forces, courts, MPs and countless small firms were affected.
+
+Microsoft says it is "deeply sorry". Services are now largely back, but if your business runs on Microsoft 365 there are a few things worth doing this week.
+
+## What happened?
+
+All times are UK time (GMT), taken from Microsoft's own updates as reported by the BBC.
+
+- **Thursday 12 November, 17:54:** Microsoft first acknowledged that users in the Americas couldn't reach their Exchange Online (Outlook) mailboxes. Within 15 minutes it warned the problem could affect Microsoft 365 globally.
+- **Thursday evening:** a number of Microsoft's servers became "unexpectedly unavailable", putting strain on the rest. Servers that were brought back failed again as soon as traffic hit them.
+- **Friday 13 November, 04:36:** Microsoft reported "partial recovery" in some regions.
+- **Friday 14:17:** email queues were "significantly reduced and approaching normal levels".
+- **Friday afternoon:** Microsoft reported "broad recovery and stability", but warned that some people may still see intermittent access problems and delayed emails.
+
+## Was it a cyber attack?
+
+No. Microsoft says it was a "technical issue not related to cyber or AI/agents". It was introduced during "an earlier network capacity upgrade" and surfaced after a later network change. Microsoft has promised a full post-incident report once its review is complete.
+
+## Why did email take so long to come back?
+
+Most outages are like a locked door: once it's unlocked, everyone walks back in. Email is different. When your mailbox is down, the rest of the world keeps sending to you. Their email servers quietly hold the messages and keep retrying.
+
+So when Microsoft fixed the fault, it faced a huge backlog of queued email from everywhere at once, which is why it brought services back gradually. The good news is that this design is also why **most emails sent to you during the outage should still arrive**, just late. The bad news is that they'll show the time they were delivered, not the time they were sent, so some messages may turn up out of order.
+
+## 5 things to do now
+
+### 1. Chase anything important you were expecting
+
+Think about what should have arrived on Thursday evening and Friday: orders, quotes, invoices, booking confirmations, password reset emails. If something still hasn't turned up, ask the sender to resend it. It's also worth checking that emails *you* sent during the outage actually reached the other person. If you got a "delivery delayed" or "undeliverable" message back, send it again.
+
+### 2. Be extra wary of "Microsoft" emails and calls
+
+Scammers love an outage. The UK's National Cyber Security Centre (NCSC) has advised everyone to be cautious about unexpected calls and messages, especially those with links. Security experts quoted by the BBC and Infosecurity Magazine expect fake "Microsoft support" emails, fake security updates and phone calls from people pretending to be IT support.
+
+The simple rules:
+
+- **Don't click links** in emails or texts about the outage. If you want to check, type the address yourself: Microsoft's public status page is **status.cloud.microsoft**.
+- **Never give your password or a sign-in code** to anyone who calls you, however genuine they sound.
+- **Don't let anyone remote into your computer** unless you contacted them first, using a number you already trust.
+
+### 3. Do a quick security check of your Microsoft 365 account
+
+While everyone was focused on getting email back, unusual activity was easy to miss. If you (or whoever manages your IT) are an admin, take ten minutes to check:
+
+- **Recent sign-ins** for logins from places or devices you don't recognise.
+- **Mailbox forwarding rules.** A rule that quietly forwards your email to an outside address is a classic sign of a hacked account.
+- **New users or changed settings** that nobody in the business made.
+
+And if you haven't already, make sure everyone uses **multi-factor authentication** (a code from an app or text) to sign in.
+
+### 4. Write a one-page "email is down" plan
+
+The businesses that coped best on Friday were the ones that had a fallback. Yours doesn't need to be complicated:
+
+- Keep an **up-to-date list of key phone numbers**, customers, suppliers and staff, somewhere that isn't your Outlook contacts. A printed copy is fine.
+- Agree **how the team will talk** if Teams is down: a phone call or a group text, for example.
+- Have a short **message ready for your website and social media**, such as "Our email is affected by the Microsoft outage. Please call us on…".
+- Bookmark **status.cloud.microsoft** so you can quickly see whether a problem is yours or Microsoft's.
+
+One word of caution from the BBC's coverage: when email goes down, people switch to WhatsApp and personal accounts to keep working. That's fine for "running late" messages, but **avoid sending customer details, bank details or sensitive files** over personal apps.
+
+### 5. Know where you stand on compensation
+
+Don't expect a payout. A lawyer speaking to the BBC said Microsoft's customer terms usually limit its liability for service interruptions. Paid business plans come with a service level agreement, so if the outage cost you money, ask your IT provider or Microsoft partner whether a service credit applies. Just don't count on it.
+
+## The bigger picture
+
+This outage is a reminder of how much small businesses depend on a handful of very large providers. As the Small Business Charter put it to the BBC, for many smaller firms email is "fundamental to everything from communicating with customers and suppliers to generating income".
+
+You can't stop Microsoft having a bad day. But you can make sure a bad day for Microsoft is only an inconvenience for you, not a disaster: keep your accounts secure, keep a fallback plan, and keep your phone numbers somewhere other than your inbox.
+
+While you're thinking about email security, it's worth making sure scammers can't send emails that pretend to come from your business. Our guide to [SPF, DKIM and DMARC](/blog/spf-dkim-dmarc-small-business-email) explains how in plain English.
+
+*Sources: Microsoft statements and status updates as reported by BBC News, plus The Conversation, ThousandEyes and Infosecurity Magazine, all checked on 14 November 2026. Microsoft's full post-incident report hasn't been published yet, so details may change.*`,
+    date: "2026-11-14",
+    readTime: "6 min read",
+    category: "Email Security",
+    audience: "business",
+    help: "securesitecheck",
+    featured: true,
+    author: {
+      name: "Future Tech Blog",
+      avatar: "FT"
+    }
+  },
+  {
     slug: "php2shell-what-small-businesses-need-to-do",
     title: "PHP2Shell: What the Big PHP Security Flaw Means for Your Small Business Website",
     excerpt:
