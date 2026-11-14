@@ -4,7 +4,7 @@ import { PhoneCall, ShieldCheck, Wrench, MessageSquareText } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Future Tech Blog is written by Iain, a Devon-based builder of AI and website security services for UK small businesses.",
+  description: "Future Tech Blog is written by a small Devon-based team: practical AI and tech advice for UK small businesses, in plain English.",
   alternates: { canonical: "/about" },
 };
 
@@ -23,7 +23,7 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white">About Future Tech Blog</h1>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Practical AI and tech advice for UK small businesses, from someone who builds it
+              Practical AI and tech advice for UK small businesses, in plain English
             </p>
           </div>
         </div>
@@ -34,11 +34,7 @@ export default function AboutPage() {
           <div className="space-y-4 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Who writes this</h2>
             <p>
-              I&apos;m Iain, based in Devon. I build technology for small businesses:{" "}
-              <a href="https://securesitecheck.co.uk" className="text-blue-600 dark:text-blue-400 underline">SecureSiteCheck</a>,
-              which checks small business websites for security problems, and{" "}
-              <a href="https://robustai.co.uk" className="text-blue-600 dark:text-blue-400 underline">Robust AI</a>,
-              an AI receptionist for UK trades.
+              Future Tech Blog is written by a small Devon-based team with a background in IT and cyber security.
             </p>
             <p>
               Most AI coverage is written for developers or big companies. This blog is for everyone else: the
@@ -46,8 +42,8 @@ export default function AboutPage() {
               five-person firm deciding whether ChatGPT or Copilot is worth paying for.
             </p>
             <p>
-              Everything here is written in plain English, with UK prices and rules in mind. When I mention my own
-              services, I&apos;ll say so.
+              Everything here is written in plain English, with UK prices and rules in mind. When we mention a service
+              we&apos;re connected with, we&apos;ll always say so.
             </p>
           </div>
 
