@@ -82,6 +82,8 @@ The businesses that coped best on Friday were the ones that had a fallback. Your
 - Have a short **message ready for your website and social media**, such as "Our email is affected by the Microsoft outage. Please call us on…".
 - Bookmark **status.cloud.microsoft** so you can quickly see whether a problem is yours or Microsoft's.
 
+For more, including a free emergency switch for incoming email and how to automate the preparation, see our guide: [When Email Goes Down: How Small Businesses Can Prepare for the Next Microsoft 365 Outage](/blog/keep-your-business-running-when-email-goes-down).
+
 One word of caution from the BBC's coverage: when email goes down, people switch to WhatsApp and personal accounts to keep working. That's fine for "running late" messages, but **avoid sending customer details, bank details or sensitive files** over personal apps.
 
 ### 5. Know where you stand on compensation
@@ -102,6 +104,115 @@ While you're thinking about email security, it's worth making sure scammers can'
     category: "Email Security",
     audience: "business",
     help: "securesitecheck",
+    featured: true,
+    author: {
+      name: "Future Tech Blog",
+      avatar: "FT"
+    }
+  },
+  {
+    slug: "keep-your-business-running-when-email-goes-down",
+    title: "When Email Goes Down: How Small Businesses Can Prepare for the Next Microsoft 365 Outage",
+    excerpt:
+      "The November Microsoft 365 outage left firms without email for most of a day. Here's how to prepare: free fallbacks, Cloudflare Email Routing as an emergency switch (pros and cons), and how to automate the prep with Microsoft, Cloudflare and Google APIs.",
+    content: `The [Microsoft 365 outage on 12 to 13 November](/blog/microsoft-365-outage-november-2026-small-business-lessons) took Outlook and Teams offline for the best part of a day. You can't stop Microsoft having a bad day, but you can decide in advance what your business does when it happens.
+
+This guide goes from the free basics to an emergency "switch" for your email, and finishes with how to automate the preparation if you're comfortable with a bit of tech.
+
+## Start with the free basics
+
+These cost nothing and cover most of the pain.
+
+- **Use desktop Outlook, not just the web version.** The desktop app keeps a copy of your recent email and calendar on your computer, so during an outage you can still read old messages and see today's appointments.
+- **Keep key phone numbers outside Outlook.** Customers, suppliers and staff, in a spreadsheet stored somewhere else, or even on paper.
+- **Agree a backup way to talk.** A phone call or a group text for the team, so nobody is waiting for Teams to come back.
+- **Have an "our email is down" message ready** for your website and social media, with your phone number.
+- **Send website enquiries somewhere other than Microsoft.** If your contact form emails a second inbox (for example a Gmail address) as well as Outlook, you'll still see new enquiries during an outage.
+- **Bookmark status.cloud.microsoft** so you can quickly tell whether a problem is yours or Microsoft's.
+
+## An emergency switch for incoming email: Cloudflare Email Routing
+
+When Microsoft's mail servers are down, other mail servers hold your incoming email and keep retrying. Where they deliver it is decided by a DNS setting on your domain called the **MX record**. Change that record, and the retries go somewhere else.
+
+**Cloudflare Email Routing** is a free service that receives email for your domain and forwards it to another inbox you've verified, such as a Gmail or Zoho address. So the emergency plan looks like this:
+
+1. Microsoft has a long outage.
+2. You switch your MX records to Cloudflare, which forwards your mail to a backup inbox.
+3. Urgent emails start arriving in the backup inbox instead of waiting in a queue.
+4. When Microsoft recovers, you switch the MX records back.
+
+### The pros
+
+- **It's free.** Email Routing is included on Cloudflare's free plan.
+- **It's quick.** Cloudflare says DNS changes usually take 5 to 15 minutes for domains on Cloudflare DNS.
+- **One rule can catch everything.** A "catch-all" rule forwards every address at your domain to one inbox. If you need copies in several inboxes, a small Cloudflare Worker can forward to each one.
+- **It can be prepared and scripted in advance** using Cloudflare's API (see below).
+- **It's well behaved with email security.** Cloudflare rewrites the sender details so forwarded mail still passes SPF checks, and it checks incoming mail against the sender's SPF, DKIM and DMARC.
+
+### The cons
+
+- **It only handles incoming email.** You still can't send from Outlook, and Teams, calendars and shared files are still down. If you reply from the backup inbox, it comes from that address, not your business one.
+- **Your domain's DNS must be on Cloudflare.** If your DNS sits with your web host or Microsoft, you'd need to move it first, which is a job for a calm day, not the middle of an outage.
+- **You lose Microsoft's spam and malware filtering** while it's switched over, and that's exactly when scammers are busiest. Cloudflare rejects mail that fails basic authentication, but it's not a full spam filter.
+- **The forwarded emails stay in the backup inbox.** They won't appear in Outlook afterwards, so someone has to work through them.
+- **Limits:** messages over 25 MB are rejected, and every destination inbox must be verified in advance.
+- **It's a manual switch, not something to leave running.** Cloudflare forwarding into Microsoft 365 wouldn't help, because when Microsoft is down the forwarding fails too.
+- **Someone has to decide when to flip it.** Switching for a short blip causes more confusion than it saves. Agree a rule in advance, for example "if Outlook has been down for more than two hours during working hours".
+
+**Our view:** in November most email was delayed, not lost, so this switch is about getting urgent messages hours sooner. For a business where a missed email means a missed job or a missed deadline, that can be worth it. For many others, the free basics above are enough.
+
+**Test it first** on a spare domain, or with your IT provider, because setting up Email Routing changes your domain's email records.
+
+## Automate the prep with APIs
+
+If you or your IT provider are comfortable with a little scripting, or a no-code tool like Make or Zapier, the big providers' APIs let you do the preparation automatically and keep it up to date. Do it **before** an outage: during a big Microsoft outage, Microsoft's own APIs may be affected too.
+
+### Microsoft Graph (Microsoft 365)
+
+Graph is Microsoft's API for Microsoft 365 data. Useful jobs:
+
+| Job | Graph endpoint | Permission |
+|---|---|---|
+| Get an alert when Microsoft reports a problem with Exchange or Teams | GET /admin/serviceAnnouncement/healthOverviews | ServiceHealth.Read.All |
+| Copy your contacts to a spreadsheet every night | GET /users/{id}/contacts | Contacts.Read |
+| Check weekly for hidden inbox rules that forward mail outside the business | GET /users/{id}/mailFolders/inbox/messageRules | MailboxSettings.Read |
+
+The service health check is the one to start with: a simple scheduled job can text you when Microsoft flags an issue, often before your staff start ringing. Note that Microsoft's health information is itself hosted by Microsoft, so keep status.cloud.microsoft as a second check.
+
+### Cloudflare API
+
+- **Pre-build the emergency switch.** Verify your backup inbox and set up the routing rules in advance, then keep a small script that swaps your MX records using Cloudflare's DNS records API (PATCH /zones/{zone_id}/dns_records/{dns_record_id}) and another that swaps them back.
+- **Use a narrowly scoped API token** that can only edit DNS for that one domain, and store it somewhere other than your Microsoft 365 account.
+- **Write down the current MX values** before you need them, so switching back is copy and paste.
+
+### Google APIs
+
+- **Keep a backup inbox ready.** A Gmail or Google Workspace inbox is a natural destination for Cloudflare forwarding, and it sits completely outside Microsoft.
+- **Keep your contact list in Google Sheets.** A nightly job can copy contacts out of Microsoft 365 (using Graph, above) into a sheet using the Google Sheets API, so the numbers are there when Outlook isn't.
+- **Archive the important stuff.** The Gmail API can import messages into a Gmail mailbox, which is handy for keeping copies of critical emails, such as orders, outside Microsoft.
+
+## Paid options for bigger firms
+
+Some email security companies sell "email continuity" services that keep a standby inbox running while your main provider is down, including sending. They're designed for larger organisations and are probably overkill for most small businesses, but they're worth asking your IT provider about if email really is business-critical.
+
+## Your one-page plan
+
+Whatever you choose, write it down on a single page and keep a printed copy:
+
+1. **How we'll know:** status.cloud.microsoft, plus any automatic alert.
+2. **How we'll talk:** phone or group text, with the numbers listed.
+3. **What we tell customers:** the ready-made website and social media message.
+4. **When we flip the email switch, and who does it** (if you've set one up).
+5. **What we check afterwards:** missing emails, suspicious "Microsoft" messages and unexpected forwarding rules.
+
+An hour of preparation now turns the next outage from a lost day into a slow morning.
+
+*Sources: Cloudflare Email Service documentation, Microsoft Graph documentation and Google's Gmail API documentation, all checked on 14 November 2026. Features and limits may change, so check the provider's documentation before setting anything up.*`,
+    date: "2026-11-14",
+    readTime: "7 min read",
+    category: "Email Security",
+    audience: "business",
+    help: "robustai",
     featured: true,
     author: {
       name: "Future Tech Blog",
